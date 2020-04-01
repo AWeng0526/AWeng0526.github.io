@@ -143,6 +143,615 @@
 
 </article>
     
+    <article id="post-lexical-analyze_tmp" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/lexical-analyze_tmp/"
+    >lexical-analyze_tmp</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/lexical-analyze_tmp/" class="article-date">
+  <time datetime="2020-04-01T16:33:46.921Z" itemprop="datePublished">2020-04-02</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <!DOCTYPE html>
+<html>
+<head>
+<title>lexical-analyze.md</title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="%E7%AE%80%E4%BB%8B">简介</h3>
+<p>使用JAVA实现简单的词法分析,支持识别C语言中关键字,标识符,运算符等.</p>
+<h3 id="%E6%80%9D%E8%B7%AF">思路</h3>
+<h4 id="dfa">DFA</h4>
+<blockquote>
+<p>由于作图工具限制无法画同心圆,故图中红色圆为终态,每个终态(上方或右方)配有一段关于终态的文字描述</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2020/04/02/G8XPFU.png" alt="G8XPFU.png"></p>
+<h4 id="%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">设计数据结构</h4>
+<ol>
+<li>枚举类的设计
+在DFA中,为每个终态顶点设置了一段文字说明.故设计一个枚举类,里面包含所有的终态顶点类型</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">/**
+ * VertexType
+ * 顶点类型的枚举类
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> VertexType {
+    ID, <span class="hljs-comment">// 标识符</span>
+    KEYWORD, <span class="hljs-comment">// 关键字</span>
+    NUMBER, <span class="hljs-comment">// 数字</span>
+    SEPARATOR, <span class="hljs-comment">// 分隔符</span>
+    BRACKET, <span class="hljs-comment">// 括号</span>
+    COMMENT, <span class="hljs-comment">// 评论</span>
+    ARI_OPERATOR, <span class="hljs-comment">// 算术运算符</span>
+    lOG_OPERATOR, <span class="hljs-comment">// 逻辑运算符</span>
+    EQUAL_OPERATOR, <span class="hljs-comment">// 等于号</span>
+    COMP_OPERATOR, <span class="hljs-comment">// 比较运算符</span>
+    WHITESPACE, <span class="hljs-comment">// 空白符</span>
+    NEWLINE, <span class="hljs-comment">// 换行符</span>
+    SIMICOLON, <span class="hljs-comment">// 分号</span>
+    ERROR,<span class="hljs-comment">// 错误符号</span>
+
+}
+</div></code></pre>
+<p>同时,针对图中的每条边的权,也设计了一个枚举类.
+这么做的优点是能有效减少顶点之间的路径,缺点则是失去了部分灵活性.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/**
+ * CharType
+ * 字符类型的枚举
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> CharType {
+    LETTER,         <span class="hljs-comment">// 字母 a-z A-Z _</span>
+    DIGIT,          <span class="hljs-comment">// 数字 0-9</span>
+    DOT,            <span class="hljs-comment">// 点 .</span>
+    SLASH,          <span class="hljs-comment">// 斜杠 /</span>
+    ARI_OPERATOR,   <span class="hljs-comment">// 算数运算符 +-*%</span>
+    lOG_OPERATOR,   <span class="hljs-comment">// 逻辑运算符 &amp;|!</span>
+    EQUAL_OPERATOR, <span class="hljs-comment">// 等于号 =</span>
+    COMP_OPERATOR,  <span class="hljs-comment">// 比较运算符 &gt;&lt;</span>
+    BRACKET,        <span class="hljs-comment">// 括号 ()[]{}</span>
+    SIMECOLON,      <span class="hljs-comment">// 分号与逗号</span>
+    WHITESPACE,     <span class="hljs-comment">// 空格 正则中\s对应的除\n以外的空白符</span>
+    NEWLINE         <span class="hljs-comment">// 换行 \n</span>
+}
+</div></code></pre>
+<ol start="2">
+<li>设计顶点类
+顶点类应当至少包含三个信息:状态,是否为终态,类型(或者说对顶点的描述)</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">/**
+ * Vertex 顶点类
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vertex</span> </span>{
+    <span class="hljs-comment">// 顶点状态,与顶点在数组的索引一致</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> state;
+    <span class="hljs-comment">// 是否为终态</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> isFinal;
+    <span class="hljs-comment">// 顶点类型</span>
+    <span class="hljs-keyword">private</span> VertexType type;
+}
+</div></code></pre>
+<ol start="3">
+<li>图的设计
+从上图可看出,该DFA是一个拥有16个节点的单向带权图.由于图中路径较少,为降低空间复杂度,不采用邻接矩阵结构.同时发现:无须求两个顶点之间的距离,故也不采用邻接链表.
+由于只需要通过当前顶点以及当前输入字符的类型来确定状态转移后的顶点
+故使用一个HashSet&lt;CharType, Integer&gt;数组来存放所有的边,key为输入字符,value为跳转的顶点,这样可使状态转移的时间复杂度降低为O(1)</li>
+</ol>
+<pre class="hljs"><code><div>    <span class="hljs-comment">/**
+     * 状态转移
+     * 
+     * <span class="hljs-doctag">@param</span> i        当前顶点索引
+     * <span class="hljs-doctag">@param</span> charType 字符类型,即边的权
+     * <span class="hljs-doctag">@return</span> 若存在状态转移,则返回转移后的顶点.否则返回null
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Vertex <span class="hljs-title">transfer</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, CharType charType)</span> </span>{
+        Object srcIndex = edges[i].get(charType);
+        <span class="hljs-keyword">return</span> srcIndex == <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">null</span> : vertexs[(<span class="hljs-keyword">int</span>) srcIndex];
+    }
+</div></code></pre>
+<h4 id="%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B">分析算法流程</h4>
+<p>整个算法的流程图如下
+<img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png">
+除此之外,算法还有许多细节之处.
+例如,关键字(KEYWORD)与表示符(ID)通过词法分析无法区分.对此,当词法分析结束后,会做进一步的判断,判断关键字的方法很简单,建立一个关键字的HashSet,查找是否存在即可,查找的时间复杂度依然是O(1).</p>
+<h3 id="%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D">项目结构介绍</h3>
+<p><img src="https://s1.ax1x.com/2020/04/02/G8OWzd.png" alt="G8OWzd.png"></p>
+<h3 id="%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">使用说明</h3>
+<p>通过项目结构介绍了解到:默认的输入输出文件位于根目录下.
+如果想修改文件路径可以打开Analyze.java启动类,修改如下代码</p>
+<pre class="hljs"><code><div>FileUtil f = <span class="hljs-keyword">new</span> FileUtil();
+</div></code></pre>
+<p>例如,使用带参数的构造函数更改输入输出文件</p>
+<pre class="hljs"><code><div>FileUtil f = <span class="hljs-keyword">new</span> FileUtil(<span class="hljs-string">"Your input path"</span>,<span class="hljs-string">"Your output path"</span>);
+</div></code></pre>
+<h4 id="%E6%A0%B7%E4%BE%8B%E5%B1%95%E7%A4%BA">样例展示</h4>
+<p>input.txt</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b,<span class="hljs-keyword">float</span> c,<span class="hljs-keyword">float</span> d)</span></span>{
+    <span class="hljs-comment">//hello analyzer wengyuxian</span>
+    <span class="hljs-keyword">int</span> x;
+    <span class="hljs-keyword">float</span> y;
+    x=a+b;
+    y=c/d;
+    <span class="hljs-keyword">if</span>(x&gt;y)
+        x=<span class="hljs-number">10</span>;
+    <span class="hljs-keyword">else</span>
+        y=<span class="hljs-number">12.5</span>;
+}
+</div></code></pre>
+<p>output.txt</p>
+<pre class="hljs"><code><div>KEYWORD       : void      
+ID            : test      
+BRACKET       : (         
+KEYWORD       : int       
+ID            : a         
+SEPARATOR     : ,         
+KEYWORD       : int       
+ID            : b         
+SEPARATOR     : ,         
+KEYWORD       : float     
+ID            : c         
+SEPARATOR     : ,         
+KEYWORD       : float     
+ID            : d         
+BRACKET       : )         
+BRACKET       : {         
+COMMENT       : //hello analyzer wengyuxian
+KEYWORD       : int       
+ID            : x         
+SEPARATOR     : ;         
+KEYWORD       : float     
+ID            : y         
+SEPARATOR     : ;         
+ID            : x         
+EQUAL_OPERATOR: =         
+ID            : a         
+ARI_OPERATOR  : +         
+ID            : b         
+SEPARATOR     : ;         
+ID            : y         
+EQUAL_OPERATOR: =         
+ID            : c         
+ARI_OPERATOR  : /         
+ID            : d         
+SEPARATOR     : ;         
+KEYWORD       : if        
+BRACKET       : (         
+ID            : x         
+COMP_OPERATOR : &gt;         
+ID            : y         
+BRACKET       : )         
+ID            : x         
+EQUAL_OPERATOR: =         
+NUMBER        : 10        
+SEPARATOR     : ;         
+KEYWORD       : else      
+ID            : y         
+EQUAL_OPERATOR: =         
+NUMBER        : 12.5      
+SEPARATOR     : ;         
+BRACKET       : }         
+</div></code></pre>
+
+</body>
+</html>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-lexical-analyze" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -190,26 +799,26 @@
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h4><blockquote>
 <p>由于作图工具限制无法画同心圆,故图中红色圆为终态,每个终态(上方或右方)配有一段关于终态的文字描述</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2020/04/01/G8kszV.png" alt="G8kszV.png"></p>
+<p><img src="https://s1.ax1x.com/2020/04/02/G8XPFU.png" alt="G8XPFU.png"></p>
 <h4 id="设计数据结构"><a href="#设计数据结构" class="headerlink" title="设计数据结构"></a>设计数据结构</h4><ol>
-<li>枚举类的设计<br>在DFA中,我们给每个终态顶点设置了一段文字说明.故设计一个枚举类,里面包含所有的终态顶点类型<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * VertexType</span></span><br><span class="line"><span class="comment"> * 顶点类型的枚举类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> VertexType &#123;</span><br><span class="line">    ID, <span class="comment">// 标识符</span></span><br><span class="line">    KEYWORD, <span class="comment">// 关键字</span></span><br><span class="line">    NUMBER, <span class="comment">// 数字</span></span><br><span class="line">    SEPARATOR, <span class="comment">// 分隔符</span></span><br><span class="line">    BRACKET, <span class="comment">// 括号</span></span><br><span class="line">    COMMENT, <span class="comment">// 评论</span></span><br><span class="line">    ARI_OPERATOR, <span class="comment">// 算术运算符</span></span><br><span class="line">    lOG_OPERATOR, <span class="comment">// 逻辑运算符</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号</span></span><br><span class="line">    COMP_OPERATOR, <span class="comment">// 比较运算符</span></span><br><span class="line">    WHITESPACE, <span class="comment">// 空白符</span></span><br><span class="line">    NEWLINE, <span class="comment">// 换行符</span></span><br><span class="line">    SIMICOLON, <span class="comment">// 分号</span></span><br><span class="line">    ERROR,<span class="comment">// 错误符号</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-同时,我们针对图中的每条边的权,我们也设计了一个枚举类.<br>这么做的优点是能有效减少顶点之间的路径,缺点则是失去了部分灵活性.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CharType</span></span><br><span class="line"><span class="comment"> * 字符类型的枚举</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CharType &#123;</span><br><span class="line">    LETTER,         <span class="comment">// 字母 a-z A-Z _</span></span><br><span class="line">    DIGIT,          <span class="comment">// 数字 0-9</span></span><br><span class="line">    DOT,            <span class="comment">// 点 .</span></span><br><span class="line">    SLASH,          <span class="comment">// 斜杠 /</span></span><br><span class="line">    ARI_OPERATOR,   <span class="comment">// 算数运算符 +-*%</span></span><br><span class="line">    lOG_OPERATOR,   <span class="comment">// 逻辑运算符 &amp;|!</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号 =</span></span><br><span class="line">    COMP_OPERATOR,  <span class="comment">// 比较运算符 &gt;&lt;</span></span><br><span class="line">    BRACKET,        <span class="comment">// 括号 ()[]&#123;&#125;</span></span><br><span class="line">    SIMECOLON,      <span class="comment">// 分号与逗号</span></span><br><span class="line">    WHITESPACE,     <span class="comment">// 空格 正则中\s对应的除\n以外的空白符</span></span><br><span class="line">    NEWLINE         <span class="comment">// 换行 \n</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>枚举类的设计<br>在DFA中,为每个终态顶点设置了一段文字说明.故设计一个枚举类,里面包含所有的终态顶点类型<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * VertexType</span></span><br><span class="line"><span class="comment"> * 顶点类型的枚举类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> VertexType &#123;</span><br><span class="line">    ID, <span class="comment">// 标识符</span></span><br><span class="line">    KEYWORD, <span class="comment">// 关键字</span></span><br><span class="line">    NUMBER, <span class="comment">// 数字</span></span><br><span class="line">    SEPARATOR, <span class="comment">// 分隔符</span></span><br><span class="line">    BRACKET, <span class="comment">// 括号</span></span><br><span class="line">    COMMENT, <span class="comment">// 评论</span></span><br><span class="line">    ARI_OPERATOR, <span class="comment">// 算术运算符</span></span><br><span class="line">    lOG_OPERATOR, <span class="comment">// 逻辑运算符</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号</span></span><br><span class="line">    COMP_OPERATOR, <span class="comment">// 比较运算符</span></span><br><span class="line">    WHITESPACE, <span class="comment">// 空白符</span></span><br><span class="line">    NEWLINE, <span class="comment">// 换行符</span></span><br><span class="line">    SIMICOLON, <span class="comment">// 分号</span></span><br><span class="line">    ERROR,<span class="comment">// 错误符号</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+同时,针对图中的每条边的权,也设计了一个枚举类.<br>这么做的优点是能有效减少顶点之间的路径,缺点则是失去了部分灵活性.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CharType</span></span><br><span class="line"><span class="comment"> * 字符类型的枚举</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CharType &#123;</span><br><span class="line">    LETTER,         <span class="comment">// 字母 a-z A-Z _</span></span><br><span class="line">    DIGIT,          <span class="comment">// 数字 0-9</span></span><br><span class="line">    DOT,            <span class="comment">// 点 .</span></span><br><span class="line">    SLASH,          <span class="comment">// 斜杠 /</span></span><br><span class="line">    ARI_OPERATOR,   <span class="comment">// 算数运算符 +-*%</span></span><br><span class="line">    lOG_OPERATOR,   <span class="comment">// 逻辑运算符 &amp;|!</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号 =</span></span><br><span class="line">    COMP_OPERATOR,  <span class="comment">// 比较运算符 &gt;&lt;</span></span><br><span class="line">    BRACKET,        <span class="comment">// 括号 ()[]&#123;&#125;</span></span><br><span class="line">    SIMECOLON,      <span class="comment">// 分号与逗号</span></span><br><span class="line">    WHITESPACE,     <span class="comment">// 空格 正则中\s对应的除\n以外的空白符</span></span><br><span class="line">    NEWLINE         <span class="comment">// 换行 \n</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 </li>
 </ol>
 <ol start="2">
-<li><p>设计顶点类<br>定点类应当至少包含三个信息:状态,是否为终态,类型(或者说对顶点的描述)</p>
+<li><p>设计顶点类<br>顶点类应当至少包含三个信息:状态,是否为终态,类型(或者说对顶点的描述)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Vertex 顶点类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vertex</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 顶点状态,与顶点在数组的索引一致</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;</span><br><span class="line">    <span class="comment">// 是否为终态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isFinal;</span><br><span class="line">    <span class="comment">// 顶点类型</span></span><br><span class="line">    <span class="keyword">private</span> VertexType type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>图的设计<br>从上图可看出,该DFA是一个拥有16个节点的单向带权图.由于图中路径较少,为降低空间复杂度,我们不采用邻接矩阵结构.同时,我们发现无须求两个顶点之间的距离,故也不采用邻接链表.<br>我们只需要通过当前顶点以及当前输入字符的类型来确定状态转移后的顶点<br>故使用一个HashSet&lt;CharType, Integer&gt;数组来存放所有的边,key为输入字符,value为跳转的顶点,这样可使状态转移的时间复杂度降低为O(1)</p>
+<li><p>图的设计<br>从上图可看出,该DFA是一个拥有16个节点的单向带权图.由于图中路径较少,为降低空间复杂度,不采用邻接矩阵结构.同时发现:无须求两个顶点之间的距离,故也不采用邻接链表.<br>由于只需要通过当前顶点以及当前输入字符的类型来确定状态转移后的顶点<br>故使用一个HashSet&lt;CharType, Integer&gt;数组来存放所有的边,key为输入字符,value为跳转的顶点,这样可使状态转移的时间复杂度降低为O(1)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 状态转移</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i        当前顶点索引</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> charType 字符类型,即边的权</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 若存在状态转移,则返回转移后的顶点.否则返回null</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Vertex <span class="title">transfer</span><span class="params">(<span class="keyword">int</span> i, CharType charType)</span> </span>&#123;</span><br><span class="line">    Object srcIndex = edges[i].get(charType);</span><br><span class="line">    <span class="keyword">return</span> srcIndex == <span class="keyword">null</span> ? <span class="keyword">null</span> : vertexs[(<span class="keyword">int</span>) srcIndex];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h4 id="分析算法流程"><a href="#分析算法流程" class="headerlink" title="分析算法流程"></a>分析算法流程</h4><p>整个算法的流程图如下<br><img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png"><br>除此之外,算法还有许多细节之处.<br>例如,关键字(KEYWORD)与表示符(ID)通过词法分析无法区分.对此,当词法分析结束后,我们会做进一步的判断,判断关键字的方法很简单,建立一个关键字的HashSet,查找是否存在即可,查找的时间复杂度依然是O(1).</p>
-<h3 id="项目结构介绍"><a href="#项目结构介绍" class="headerlink" title="项目结构介绍"></a>项目结构介绍</h3><p><img src="https://s1.ax1x.com/2020/04/01/G8UDYR.png" alt="G8UDYR.png"></p>
-<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>通过项目结构介绍我们了解到默认的输入输出文件位于根目录下.如果想修改文件路径可以打开Analyze.java启动类,修改如下代码</p>
+<h4 id="分析算法流程"><a href="#分析算法流程" class="headerlink" title="分析算法流程"></a>分析算法流程</h4><p>整个算法的流程图如下<br><img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png"><br>除此之外,算法还有许多细节之处.<br>例如,关键字(KEYWORD)与表示符(ID)通过词法分析无法区分.对此,当词法分析结束后,会做进一步的判断,判断关键字的方法很简单,建立一个关键字的HashSet,查找是否存在即可,查找的时间复杂度依然是O(1).</p>
+<h3 id="项目结构介绍"><a href="#项目结构介绍" class="headerlink" title="项目结构介绍"></a>项目结构介绍</h3><p><img src="https://s1.ax1x.com/2020/04/02/G8OWzd.png" alt="G8OWzd.png"></p>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>通过项目结构介绍了解到:默认的输入输出文件位于根目录下.<br>如果想修改文件路径可以打开Analyze.java启动类,修改如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileUtil f = <span class="keyword">new</span> FileUtil();</span><br></pre></td></tr></table></figure>
 
 <p>例如,使用带参数的构造函数更改输入输出文件</p>
