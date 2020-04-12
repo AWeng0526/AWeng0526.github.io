@@ -62,7 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2k字</span>
+            <span class="post-count">2.5k字</span>
         </span>
     </span>
 
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7分钟</span>
+            <span class="post-count">9分钟</span>
         </span>
     </span>
 </div>
@@ -136,20 +136,36 @@
 
 <h4 id="补充说明-1"><a href="#补充说明-1" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;可以看到,创建了一个二维数组transitions以及一个HashMap的集合transMaps.二者都是状态转移的辅助描述.<br>&emsp; &emsp;transitions的作用是:当你需要获得顶点n的所有状态转移时,你可以调用transitions.get(n)而非去迭代遍历Dtrans并添加if判断.学习过计算机组成原理的人知道,CPU是以超标量流水线方式工作的,也就是说CPU希望执行的指令是连续的,if判断会产生一条jump指令,这会使程序性能下降.<br>&emsp; &emsp;transMaps的作用是:当你需要知道顶点n经字符c转移后得到的状态时,你可以调用transMaps.get(n).get(c)而非去transitions中查找.哈希查找的时间复杂度为O(1).</p>
 <h3 id="DFA最小化"><a href="#DFA最小化" class="headerlink" title="DFA最小化"></a>DFA最小化</h3><p>DFA最小化需要不断回溯,这里采用一种比较特殊的手段,可以不借助递归也不借助栈即可实现回溯.</p>
-<h4 id="核心算法-1"><a href="#核心算法-1" class="headerlink" title="核心算法"></a>核心算法</h4><p>&emsp; &emsp;初次划分时,我们将终态置于组0,其他置于组1.这与之间的设定完全相反(一般地,我们认为编号0是初态而终态为编号最大值),这是因为我们只需要对非终态进行划分,这样做使得只需从组1开始扫描.当然,你也可以保持终态为1,然后每次反向扫描.<br>&emsp; &emsp;接下来我们开始检查组1,我们默认每个组的第一个元素为改组代表,所有与代表不同组的元素我们添加到一个新的组中.而且一旦发现新的组别,我们需重置迭代索引来实现回溯.</p>
+<h4 id="核心算法-1"><a href="#核心算法-1" class="headerlink" title="核心算法"></a>核心算法</h4><p>&emsp; &emsp;初次划分时,我们将终态置于组0,其他置于组1.这与之间的设定完全相反(一般地,我们认为编号0是初态而终态为编号最大值),这是因为我们只需要对非终态进行划分,这样做使得只需从组1开始扫描.当然,你也可以保持终态为1,然后每次反向扫描.<br>&emsp; &emsp;接下来我们开始检查组1,我们默认每个组的第一个元素为改组代表,所有与代表不同组的元素我们添加到一个新的组中.而且一旦发现新的组别,我们需重置迭代索引来实现回溯.<br>&emsp; &emsp;最终,我们直接以组号代表该小组.</p>
 <p>主要流程图如下:<br><a href="https://imgchr.com/i/GL4TMR" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GL4TMR.png" alt="GL4TMR.png"></a></p>
 <h4 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h4><p>这里再给出一个实例,假设有如下DFA结点0,1,2,3,4.其中4为终态.最终划分结果为每个结点各一组.</p>
 <ol>
 <li>初次划分g0={4},g1={0,1,2,3}.</li>
 <li>遍历g1,发现1,2,3皆与0不同组,将其加入g2.目前g1={0},g2={1,2,3}.</li>
-<li>重新遍历,g1通过.遍历g2,发现2与1不同组,将其加入g3,得到g2={1,3},g3={2}.</li>
-<li>重新遍历,g1通过.由于2被划分到g3,3与1此时不同组,将其加入g4.得到g2={1},g3={2},g4={3}.</li>
-<li>重新遍历,均通过,结束划分.</li>
+<li>重新遍历,g1通过.遍历g2,发现2与1不同组,将其加入g3,得到g2={1,2},g3={3}.</li>
+<li>重新遍历,g1通过.由于2被划分到g3,3与1此时不同组,将其加入g4.得到g2={1},g3={3},g4={2}.</li>
+<li>重新遍历,均通过,以组号作为该组代表编号,结束划分.</li>
 </ol>
 <h4 id="数据结构-2"><a href="#数据结构-2" class="headerlink" title="数据结构"></a>数据结构</h4><p>由于在最小化DFA过程中打乱了顺序,故我们需要记录初态</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MinDFA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> inital;<span class="comment">// 初态</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;DVertex&gt; Dstates = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;HashMap&lt;Character, Integer&gt;&gt; transMaps = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="MinDFA合并"><a href="#MinDFA合并" class="headerlink" title="MinDFA合并"></a>MinDFA合并</h3><p>至此,我们已经为每个正规式得到了其最小化的DFA,即MinDFA.接下来我们需要将这些DFA合并成一个大的DFA.</p>
+<h3 id="MinDFA合并"><a href="#MinDFA合并" class="headerlink" title="MinDFA合并"></a>MinDFA合并</h3><p>&emsp; &emsp;至此,我们已经为每个正规式得到了其最小化的DFA,即MinDFA.接下来我们需要将这些DFA合并成一个大的DFA.<br>DFA的合并与汤普森算法中的|操作非常相似,只不过DFA的合并是将所有初态合并为一个新初态,并且不添加新的终态.</p>
+<h4 id="核心算法-2"><a href="#核心算法-2" class="headerlink" title="核心算法"></a>核心算法</h4><p>算法主要流程图如下:</p>
+<p><a href="https://imgchr.com/i/GLTIk6" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GLTIk6.png" alt="GLTIk6.png"></a></p>
+<h4 id="补充说明-2"><a href="#补充说明-2" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;在计算DFA结点新编号时,需要注意结点编号小于初态与结点编号大于初态的偏移量是不同的.这是因为所有初态被合并至一个新初态.例如:当我们合并第一个DFA时,偏移量=1(因为已经有一个公共初态结点0).设该DFA中Dstates为{0,1,2,3},其中1为初态.</p>
+<p>&emsp; &emsp;合并DFA时各个结点的新结点分别为:</p>
+<ol>
+<li>0=0+1=1</li>
+<li>1=0(被合并至公共初态)</li>
+<li>2=2+1-1=2(初态结点被合并)</li>
+<li>3=3+1-1=3(初态结点被合并)</li>
+</ol>
+<p>&emsp; &emsp;还需注意的是,多个MinDFA合并后得到的并非是MinDFA,严格来讲,可能合并结果连DFA都不是.举个例子,有如下两个DFA:</p>
+<p><a href="https://imgchr.com/i/GLbyff" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GLbyff.png" alt="GLbyff.png"></a></p>
+<p>合并后会得到:<br><img src="https://s1.ax1x.com/2020/04/12/GLbot0.png" alt="GLbot0.png"></p>
+<p>可以看出,结点0接受字符/时有两条状态转移,这不符合DFA的定义.在编码中,由于使用HashSet,第二个DFA会覆盖第一个DFA,也就是说最终得到的DFA不接受字符/.好在目前的正规式不会有这样的冲突.</p>
+<h3 id="后续过程"><a href="#后续过程" class="headerlink" title="后续过程"></a>后续过程</h3><p>后续过程可参考我的另一篇博客:<a href="https://wengyuxian.work/lexical-analyze/" target="_blank" rel="noopener">后续过程</a></p>
+<h2 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>根目录<br>&emsp; &emsp;work/wengyuxian<br>&emsp; &emsp;&emsp; &emsp;dfa &emsp; &emsp;dfa相应的数据结构包<br>&emsp; &emsp;&emsp; &emsp;thompson &emsp; &emsp;包括NFA的数据结构以及汤普森算法的实现<br>&emsp; &emsp;&emsp; &emsp;util &emsp; &emsp;工具类,包括文件的读取,写入.字母表的定义等<br>&emsp; &emsp;reg.txt &emsp; &emsp;默认正规式文本<br>&emsp; &emsp;input.txt &emsp; &emsp;默认源程序文本<br>&emsp; &emsp;output.txt &emsp; &emsp;默认输出结果文本</p>
 
       
       <!-- reward -->
