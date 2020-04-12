@@ -143,6 +143,130 @@
 
 </article>
     
+    <article id="post-lexical-analyze-pro" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/lexical-analyze-pro/"
+    >从正规式到词法分析</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/lexical-analyze-pro/" class="article-date">
+  <time datetime="2020-04-12T05:36:46.000Z" itemprop="datePublished">2020-04-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用JAVA实现简单的词法分析,支持识别C语言中关键字,标识符,运算符等.</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="正规式-gt-NFA"><a href="#正规式-gt-NFA" class="headerlink" title="正规式-&gt;NFA"></a>正规式-&gt;NFA</h3><p>&emsp; &emsp; 对于一个正规式,我们可以将其看作一个表达式.表达式中的操作数为字母表中的字符,表达式中的操作符包括.(连接),|(或运算),*(星闭包),+(正闭包)以及用于表达优先级的().<br>每个操作数可以看做单字符的汤普森表示,例如a|b可以表达为:</p>
+<p>操作数:</p>
+<p><img src="https://s1.ax1x.com/2020/04/12/GLKB1f.png" alt="GLKB1f.png"></p>
+<p>操作符:</p>
+<p><img src="https://s1.ax1x.com/2020/04/12/GLMk4I.png" alt="GLMk4I.png"></p>
+<p>&emsp; &emsp; 所以,正规式到NFA只是一个简单的表达式求值过程.有点特殊的是,.(连接符)是缺省的,故我们需手动补齐.例如abc我们将其补全为a.b.c</p>
+<h4 id="核心算法"><a href="#核心算法" class="headerlink" title="核心算法"></a>核心算法</h4><p>整个算法的主要流程图如下,图中省略了部分细节</p>
+<p><img src="https://s1.ax1x.com/2020/04/12/GLlh9I.png" alt="GLlh9I.png"></p>
+<p>字符读取完成后,还需要计算操作数栈,操作符栈中表达式,其过程类似上图中操作符分支,故此处不再赘叙.</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>NFA的数据结构如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NFA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Vertex&gt; states;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Trans&gt; transitions;</span><br><span class="line">    <span class="comment">// 对于一个正规式而言,只会有一个终态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> finalState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们默认状态0为初态,故数据结构中无需记录初态.下面给出Vertex与Trans的数据结构:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vertex</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顶点状态,应该与顶点索引保持一致</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> state;</span><br><span class="line">    <span class="comment">// 是否为终态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isFinal;</span><br><span class="line">    <span class="comment">// 类型</span></span><br><span class="line">    <span class="keyword">public</span> String type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trans</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> stateFrom, stateTo;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span> transSymbol;</span><br></pre></td></tr></table></figure>
+
+<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>如果阅读Thompson.java的源码,会发现其中实现交,并,闭包等的操作函数形式如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * *闭包</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n 操作数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 返回*闭包的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NFA <span class="title">kleene</span><span class="params">(NFA n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// todo...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp; &emsp; 熟悉java的人可能会认为由于类的引用机制,完全可以对n进行修改而没必要返回一个新的NFA.的确,这样做似乎可以节省一些空间.但个人认为这么做带来的坏处更大.<br>&emsp; &emsp; 首先,NFA中的states是ArrayList类型,*闭包需要添加一个新的初态,这意味着需要执行一次插入操作.对一个随机访问型的列表执行插入操作是十分耗时的(最后生成的NFA可能有几百个结点,这意味一次插入操作需要移动几百个结点).那如果改用LinkedList呢?答案是否定的,因为我们需要随机访问.那这么做会浪费很多空间吗?不见得,java的gc机制会自动帮我们回收空间.<br>&emsp; &emsp; 最后再说一点,过多的依赖引用可能会造成高耦合低内聚.这意味着可能你在某个地方修改了某个变量的值,导致整个程序崩溃,这也是我宁愿多花费一点空间的原因.<br>&emsp; &emsp; 接下来思考另一个问题.熟悉java多态的人可能会认为在声明属性时可以使用List声明,等到需要实例化时再给予具体的类型.确实,利用多态可以为我们省下许多功夫,但是他也有着他的限制性.<br>&emsp; &emsp; 如果所有属性都采用接口声明,很有可能你需要在某些时刻进行一些强制类型转换(例如你需要调用LinkedList中的方法,但你使用List接口声明),他们的代码看起来可能是这样的:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( someValues <span class="keyword">instanceof</span> someClass)&#123;</span><br><span class="line">    <span class="comment">// do class cast</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// do other thing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>考虑到强制转换类型可能失败,我们还需要添加一段try-catch:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( someValues <span class="keyword">instanceof</span> someClass)&#123;</span><br><span class="line">    <span class="comment">// do class cast</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// do other thing</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    <span class="comment">// do some thing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp; &emsp;现在问题暴露出来了,使用接口的确能使我们的代码更抽象,但也给我们带来了很多麻烦.而且过多的依赖接口也说明你对算法的流程掌握不到位,你无法正确的选择数据结构.</p>
+<p><strong>以上的两个问题在整个词法分析过程中皆有出现.这两个问题困扰了我很久,可能我做出的选择对程序不是最优解,但对写代码来的人来讲也不是最差解.</strong></p>
+<h3 id="NFA转DFA"><a href="#NFA转DFA" class="headerlink" title="NFA转DFA"></a>NFA转DFA</h3><p>NFA转DFA的算法课本上已经将的十分详尽了,故此处不再赘述.这里只简单介绍数据结构以及部分注意事项.</p>
+<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p>DFA:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DFA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;DVertex&gt; Dstates = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Trans&gt; Dtrans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 每个顶点的状态转移集的集合,即transitions.get(i)为顶点i的状态转移</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Trans&gt;&gt; transitions;</span><br><span class="line">    <span class="comment">// 类似transitions,transMaps为每个顶点的状态转移映射的集合</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;HashMap&lt;Character, Integer&gt;&gt; transMaps;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>DVertex:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DVertex DFA中的顶点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DVertex</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">public</span> HashSet&lt;Integer&gt; states;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isFinal = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">public</span> String type = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="补充说明-1"><a href="#补充说明-1" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;可以看到,创建了一个二维数组transitions以及一个HashMap的集合transMaps.二者都是状态转移的辅助描述.<br>&emsp; &emsp;transitions的作用是:当你需要获得顶点n的所有状态转移时,你可以调用transitions.get(n)而非去迭代遍历Dtrans并添加if判断.学习过计算机组成原理的人知道,CPU是以超标量流水线方式工作的,也就是说CPU希望执行的指令是连续的,if判断会产生一条jump指令,这会使程序性能下降.<br>&emsp; &emsp;transMaps的作用是:当你需要知道顶点n经字符c转移后得到的状态时,你可以调用transMaps.get(n).get(c)而非去transitions中查找.哈希查找的时间复杂度为O(1).</p>
+<h3 id="DFA最小化"><a href="#DFA最小化" class="headerlink" title="DFA最小化"></a>DFA最小化</h3><p>DFA最小化需要不断回溯,这里采用一种比较特殊的手段,可以不借助递归也不借助栈即可实现回溯.</p>
+<h4 id="核心算法-1"><a href="#核心算法-1" class="headerlink" title="核心算法"></a>核心算法</h4><p>&emsp; &emsp;初次划分时,我们将终态置于组0,其他置于组1.这与之间的设定完全相反(一般地,我们认为编号0是初态而终态为编号最大值),这是因为我们只需要对非终态进行划分,这样做使得只需从组1开始扫描.当然,你也可以保持终态为1,然后每次反向扫描.<br>&emsp; &emsp;接下来我们开始检查组1,我们默认每个组的第一个元素为改组代表,所有与代表不同组的元素我们添加到一个新的组中.而且一旦发现新的组别,我们需重置迭代索引来实现回溯.</p>
+<p>主要流程图如下:<br><a href="https://imgchr.com/i/GL4TMR" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GL4TMR.png" alt="GL4TMR.png"></a></p>
+<h4 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h4><p>这里再给出一个实例,假设有如下DFA结点0,1,2,3,4.其中4为终态.最终划分结果为每个结点各一组.</p>
+<ol>
+<li>初次划分g0={4},g1={0,1,2,3}.</li>
+<li>遍历g1,发现1,2,3皆与0不同组,将其加入g2.目前g1={0},g2={1,2,3}.</li>
+<li>重新遍历,g1通过.遍历g2,发现2与1不同组,将其加入g3,得到g2={1,3},g3={2}.</li>
+<li>重新遍历,g1通过.由于2被划分到g3,3与1此时不同组,将其加入g4.得到g2={1},g3={2},g4={3}.</li>
+<li>重新遍历,均通过,结束划分.</li>
+</ol>
+<h4 id="数据结构-2"><a href="#数据结构-2" class="headerlink" title="数据结构"></a>数据结构</h4><p>由于在最小化DFA过程中打乱了顺序,故我们需要记录初态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MinDFA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> inital;<span class="comment">// 初态</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;DVertex&gt; Dstates = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;HashMap&lt;Character, Integer&gt;&gt; transMaps = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MinDFA合并"><a href="#MinDFA合并" class="headerlink" title="MinDFA合并"></a>MinDFA合并</h3><p>至此,我们已经为每个正规式得到了其最小化的DFA,即MinDFA.接下来我们需要将这些DFA合并成一个大的DFA.</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/" rel="tag">词法分析</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-lexical-analyze" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
