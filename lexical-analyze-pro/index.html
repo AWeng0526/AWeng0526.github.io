@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    从正规式到词法分析 |  Weng
+    从正规式到词法分析 |  
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -62,7 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5.1k字</span>
+            <span class="post-count">5.3k字</span>
         </span>
     </span>
 
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">19分钟</span>
+            <span class="post-count">20分钟</span>
         </span>
     </span>
 </div>
@@ -99,6 +99,8 @@
 
       
       <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用JAVA实现简单的词法分析,支持识别C语言中关键字,标识符,运算符等.</p>
+<a id="more"></a>
+
 <h2 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>根目录<br>&emsp; &emsp;log &emsp; &emsp;日志包,存有DFA,NFA,MinDFA等结构的信息<br>&emsp; &emsp;reg.txt &emsp; &emsp;默认正规式文本<br>&emsp; &emsp;input.txt &emsp; &emsp;默认源程序文本<br>&emsp; &emsp;output.txt &emsp; &emsp;默认输出结果文本<br>&emsp; &emsp;work/wengyuxian<br>&emsp; &emsp;&emsp; &emsp;dfa &emsp; &emsp;dfa相应的数据结构包<br>&emsp; &emsp;&emsp; &emsp;thompson &emsp; &emsp;包括NFA的数据结构以及汤普森算法的实现<br>&emsp; &emsp;&emsp; &emsp;util &emsp; &emsp;工具类,包括文件的读取,写入.字母表的定义等</p>
 <h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>调用work/wengyuxian/util/AnalyzeUtil.java中main函数即可.</p>
 <h3 id="正规式"><a href="#正规式" class="headerlink" title="正规式"></a>正规式</h3><h4 id="正规式规范"><a href="#正规式规范" class="headerlink" title="正规式规范"></a>正规式规范</h4><p>类似LEX,本程序对正规式有以下的规范要求:</p>
@@ -153,7 +155,8 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trans</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> stateFrom, stateTo;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span> transSymbol;</span><br></pre></td></tr></table></figure>
 
-<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>如果阅读Thompson.java的源码,会发现其中实现交,并,闭包等的操作函数形式如下:</p>
+<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp;&emsp;可以将中缀表达式转换为后缀表达式,例如a+b*转换为ab*+,这样求值的过程会方便许多.但是两种算法本质是一样的,毕竟中缀表达式转后缀表达式需要用到栈.这么做的好处在于模块化.</p>
+<p>如果阅读Thompson.java的源码,会发现其中实现交,并,闭包等的操作函数形式如下:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * *闭包</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n 操作数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 返回*闭包的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NFA <span class="title">kleene</span><span class="params">(NFA n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// todo...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp; &emsp; 熟悉java的人可能会认为由于类的引用机制,完全可以对n进行修改而没必要返回一个新的NFA.的确,这样做似乎可以节省一些空间.但个人认为这么做带来的坏处更大.<br>&emsp; &emsp; 首先,NFA中的states是ArrayList类型,*闭包需要添加一个新的初态,这意味着需要执行一次插入操作.对一个随机访问型的列表执行插入操作是十分耗时的(最后生成的NFA可能有几百个结点,这意味一次插入操作需要移动几百个结点).那如果改用LinkedList呢?答案是否定的,因为我们需要随机访问.那这么做会浪费很多空间吗?不见得,java的gc机制会自动帮我们回收空间.<br>&emsp; &emsp; 最后再说一点,过多的依赖引用可能会造成高耦合低内聚.这意味着可能你在某个地方修改了某个变量的值,导致整个程序崩溃,这也是我宁愿多花费一点空间的原因.<br>&emsp; &emsp; 接下来思考另一个问题.熟悉java多态的人可能会认为在声明属性时可以使用List声明,等到需要实例化时再给予具体的类型.确实,利用多态可以为我们省下许多功夫,但是他也有着他的限制性.<br>&emsp; &emsp; 如果所有属性都采用接口声明,很有可能你需要在某些时刻进行一些强制类型转换(例如你需要调用LinkedList中的方法,但你使用List接口声明),他们的代码看起来可能是这样的:</p>
@@ -233,109 +236,109 @@
 <li>m1|m2|m3,m4状态转移数目为:10,1.m1|m2得到10+1+4=14条状态转移.</li>
 </ol>
 <p>不难看出,这是一个等差数列.所以该部分时间复杂度为O(k^2).<br>综上,汤普森算法的时间复杂度为O(n*k^2).</p>
-<h3 id="NFA-gt-DFA"><a href="#NFA-gt-DFA" class="headerlink" title="NFA-&gt;DFA"></a>NFA-&gt;DFA</h3><p>&emsp; &emsp;设字母表有n个元素,NFA中有m个结点.由于使用Hash,状态转移的数目不影响查找状态转移的速率,时间复杂度为O(1).<br>&emsp; &emsp;表达式中有大量的并操作会导致时间复杂度的急剧上升,如果查看log中文件,可以发现ID的NFA,DFA结点数目都为460.也就是说,每次求空闭包的时间复杂度可高达O(m).对每个结点,我们要求n次:<br>&emsp; &emsp;空闭包(smove(m1,字母表中元素))<br>&emsp; &emsp;生成一个结点后需要查找改结点是否存在,该部分时间复杂度为1+2+3+..m(参考ID的DFA数目与NFA数目相同,这里考虑最差情况),即O(m^2).<br>故最差时间复杂度为O(nm^2)+O(m^2),即O(nm^2)<br>最优时间复杂度即为只有连接操作,求空闭包时间幅度为O(1).<br>综上,NFA-&gt;DFA部分时间复杂度为O(nm^2)</p>
-<h3 id="DFA-gt-MinDFA"><a href="#DFA-gt-MinDFA" class="headerlink" title="DFA-&gt;MinDFA"></a>DFA-&gt;MinDFA</h3><p>设有n个非终态结点.<br>最差情况为n个结点属于n个分组.这里给出一个例子,设n=5.</p>
+<h3 id="NFA-gt-DFA"><a href="#NFA-gt-DFA" class="headerlink" title="NFA-&gt;DFA"></a>NFA-&gt;DFA</h3><p>&emsp; &emsp;设字母表有n个元素,NFA中有m个结点.由于使用Hash,状态转移的数目不影响查找状态转移的速率,时间复杂度为O(1).<br>&emsp; &emsp;表达式中有大量的并操作会导致时间复杂度的急剧上升,如果查看log中文件,可以发现ID的NFA,DFA结点数目都为460.也就是说,每次求空闭包的时间复杂度可高达O(m).对每个结点,我们要求n次:<br>&emsp; &emsp;空闭包(smove(m1,字母表中元素))<br>&emsp; &emsp;生成一个结点后需要查找该结点是否存在,该部分时间复杂度为1+2+3+..m(参考ID的DFA数目与NFA数目相同,这里考虑最差情况),即O(m^2).<br>故最差时间复杂度为O(nm^2)+O(m^2),即O(nm^2)<br>最优时间复杂度即为只有连接操作,求空闭包时间复杂度为O(1).<br>综上,NFA-&gt;DFA部分时间复杂度为O(nm^2)</p>
+<h3 id="DFA-gt-MinDFA"><a href="#DFA-gt-MinDFA" class="headerlink" title="DFA-&gt;MinDFA"></a>DFA-&gt;MinDFA</h3><p>设有n个非终态结点,字母表中有m个元素.<br>最差情况为n个结点属于n个分组.这里给出一个例子,设n=5.</p>
 <table>
 <thead>
 <tr>
 <th align="center">扫描组号</th>
 <th align="center">扫描组内容</th>
-<th align="center">扫描次数</th>
+<th align="center">检查同组次数</th>
 <th align="center">分组情况</th>
 </tr>
 </thead>
 <tbody><tr>
 <td align="center">1</td>
 <td align="center">12345</td>
-<td align="center">5</td>
-<td align="center">12345</td>
+<td align="center">4</td>
+<td align="center">1,2345</td>
 </tr>
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2345</td>
 </tr>
 <tr>
 <td align="center">2</td>
 <td align="center">2345</td>
-<td align="center">4</td>
+<td align="center">3</td>
 <td align="center">1,2,345</td>
 </tr>
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,345</td>
 </tr>
 <tr>
 <td align="center">2</td>
 <td align="center">2</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,345</td>
 </tr>
 <tr>
 <td align="center">3</td>
 <td align="center">345</td>
-<td align="center">3</td>
+<td align="center">2</td>
 <td align="center">1,2,3,45</td>
 </tr>
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,45</td>
 </tr>
 <tr>
 <td align="center">2</td>
 <td align="center">2</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,45</td>
 </tr>
 <tr>
 <td align="center">3</td>
 <td align="center">3</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,45</td>
 </tr>
 <tr>
 <td align="center">4</td>
 <td align="center">45</td>
-<td align="center">2</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1,2,3,4,5</td>
 </tr>
 <tr>
-<td align="center">2</td>
-<td align="center">2</td>
 <td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1,2,3,4,5</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">0</td>
 <td align="center">1,2,3,4,5</td>
 </tr>
 <tr>
 <td align="center">3</td>
 <td align="center">3</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,4,5</td>
 </tr>
 <tr>
 <td align="center">4</td>
 <td align="center">4</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,4,5</td>
 </tr>
 <tr>
 <td align="center">5</td>
 <td align="center">5</td>
-<td align="center">1</td>
+<td align="center">0</td>
 <td align="center">1,2,3,4,5</td>
 </tr>
 </tbody></table>
-<p>&emsp; &emsp;先忽略扫描次数为1的,可以看到1扫描了5次,2扫描了4次,3扫描了3次……显然这是一个等差数列,故这部分时间复杂度为O(n^2).<br>&emsp; &emsp;再来看扫描次数为1的,可以看到1重复扫描了4次,2扫描了3次……同样的,这也是一个等差数列,时间复杂度同为O(n^2)<br>&emsp; &emsp;故最差时间复杂度为O(n^2)<br>&emsp; &emsp;当只有一个分组时时间复杂度最优,为O(n)<br>综上,DFA-&gt;MinDFA时间复杂度为O(n^2)</p>
+<p>&emsp; &emsp;检查两个DFA是否同组需要遍历字母表,求得其中状态转移.程序中使用Hash,故查找时间复杂度为O(1),故检查两个DFA的时间复杂度为O(m).<br>&emsp; &emsp;先忽略重复扫描的组,可以看到组1需要检查4个元素是否与1同组,组2需要检查3个元素是否与2同组……显然,这是一个等差数列,时间复杂度为O(n^2)O(m).<br>&emsp; &emsp;再来看重复扫描的组,可以看到组1重复扫描了4次,组2扫描了3次……同样的,这也是一个等差数列,而重复扫描时由于不需要检查两个DFA是否同组,时间复杂度为O(1),故时间复杂度同为O(n^2).<br>&emsp; &emsp;故最差时间复杂度为O(n^2)O(m)+O(n^2),即O(mn^2).<br>&emsp; &emsp;当只有一个分组时时间复杂度最优,为O(n).<br>综上,DFA-&gt;MinDFA时间复杂度为O(mn^2).</p>
 <h3 id="合并DFA"><a href="#合并DFA" class="headerlink" title="合并DFA"></a>合并DFA</h3><p>该部分时间复杂度计算比较简单,设最终共有n个顶点,m条状态转移.时间复杂度为O(n)+O(m)</p>
 
       
@@ -505,11 +508,6 @@
       </li>
       <li>
         
-        Powered by
-        
-        
-        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
-        
       </li>
     </ul>
     <ul class="list-inline">
@@ -535,7 +533,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="Weng"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt=""></a>
   </div>
   
   <ul class="nav nav-main">

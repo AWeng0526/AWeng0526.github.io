@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     Weng
+     
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,20 +32,15 @@
       
 <section class="cover">
     
-      
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/cover1.jpg" alt="image frame" />
+      <img src="/images/DMC5.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
-      <h1><a href="/">Weng</a></h1>
+      <h1><a href="/"></a></h1>
       <div id="subtitle-box">
         
-          <span id="subtitle">祝你岁月无波澜,敬我余生不悲欢</span>
+          <span id="subtitle"></span>
         
       </div>
       <div>
@@ -187,245 +182,9 @@
 
       
       <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用JAVA实现简单的词法分析,支持识别C语言中关键字,标识符,运算符等.</p>
-<h2 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>根目录<br>&emsp; &emsp;log &emsp; &emsp;日志包,存有DFA,NFA,MinDFA等结构的信息<br>&emsp; &emsp;reg.txt &emsp; &emsp;默认正规式文本<br>&emsp; &emsp;input.txt &emsp; &emsp;默认源程序文本<br>&emsp; &emsp;output.txt &emsp; &emsp;默认输出结果文本<br>&emsp; &emsp;work/wengyuxian<br>&emsp; &emsp;&emsp; &emsp;dfa &emsp; &emsp;dfa相应的数据结构包<br>&emsp; &emsp;&emsp; &emsp;thompson &emsp; &emsp;包括NFA的数据结构以及汤普森算法的实现<br>&emsp; &emsp;&emsp; &emsp;util &emsp; &emsp;工具类,包括文件的读取,写入.字母表的定义等</p>
-<h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>调用work/wengyuxian/util/AnalyzeUtil.java中main函数即可.</p>
-<h3 id="正规式"><a href="#正规式" class="headerlink" title="正规式"></a>正规式</h3><h4 id="正规式规范"><a href="#正规式规范" class="headerlink" title="正规式规范"></a>正规式规范</h4><p>类似LEX,本程序对正规式有以下的规范要求:</p>
-<ul>
-<li>正规式文本中不要包含空行.</li>
-<li>每一行代表一个正规式.</li>
-<li>行首不要留空格,正规式定义中也不要留有空格.</li>
-<li>正规式分两部分:名称+内容,两者以空格分隔.即”名称 内容”.</li>
-<li>不支持递归定义正规式,但内置了digit和letter两个正规式.可以用{digit}/{letter}调用.</li>
-<li>更多规范见下文.</li>
-</ul>
-<h4 id="字母表"><a href="#字母表" class="headerlink" title="字母表"></a>字母表</h4><p>字母表的定义位于work/wengyuxian/util/Alphabets.java中,可根据需求添加/删减元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字母表</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> HashSet&lt;Character&gt; alphabets = <span class="keyword">new</span> HashSet&lt;Character&gt;(Arrays.asList(<span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>,</span><br><span class="line">        <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'d'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>,</span><br><span class="line">        <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>,</span><br><span class="line">        <span class="string">'M'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'P'</span>, <span class="string">'Q'</span>, <span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>, <span class="string">'_'</span>, <span class="string">'.'</span>, <span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'&amp;'</span>,</span><br><span class="line">        <span class="string">'!'</span>, <span class="string">'\\'</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'['</span>, <span class="string">']'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>, <span class="string">'&gt;'</span>, <span class="string">'&lt;'</span>, <span class="string">'='</span>, <span class="string">';'</span>, <span class="string">','</span>, <span class="string">' '</span>, <span class="string">'\n'</span>, <span class="string">'#'</span>));</span><br></pre></td></tr></table></figure>
-
-<h4 id="支持操作"><a href="#支持操作" class="headerlink" title="支持操作"></a>支持操作</h4><p>支持连接,并,星闭包,正闭包,括号操作.<br>除连接符(.)以外,若想匹配操作符,请使用\转义.由于连接符是默认行为,无需在正规式中写出,字符’.’并不会被识别为操作符.即a.b正规式接受字符串a.b而不接受字符串ab.</p>
-<h4 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h4><p>\为转义操作符,除上述操作符外,还支持以下字符转义:</p>
-<ol>
-<li>“\s”–&gt;’\s’</li>
-<li>“\r”–&gt;’\r’</li>
-<li>“\t”–&gt;’\t’</li>
-<li>“\n”–&gt;’\n’</li>
-<li>“\\“–&gt;’\‘</li>
-</ol>
-<p>字母表中的其他元素使用\转义将得到与原字符一样的效果.</p>
-<h4 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h4><p>使用#代表空串,除非明确的知道需要使用空串(例如实现?操作符),请不要使用#定义正规式.</p>
-<h4 id="正规式有关限制"><a href="#正规式有关限制" class="headerlink" title="正规式有关限制"></a>正规式有关限制</h4><ul>
-<li><p>请保证你的正规式无误,正规式错误是不被容许的.程序无法识别正规式时会立即结束.</p>
-</li>
-<li><p>请确保你的正规式最终生成的最小化DFA中,终态不包含初态.这点会在后面MinDFA给出说明.</p>
-</li>
-</ul>
-<h3 id="更改文件路径"><a href="#更改文件路径" class="headerlink" title="更改文件路径"></a>更改文件路径</h3><p>在work/wengyuxian/util/AnalyzeUtil.java中,找到如下代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认路径为 ./reg.txt ./input.txt ./output.txt</span></span><br><span class="line">FileUtil fileUtil = <span class="keyword">new</span> FileUtil();</span><br><span class="line"></span><br><span class="line"><span class="comment">// other code</span></span><br><span class="line"><span class="comment">// 写入</span></span><br><span class="line">fileUtil.writeFile(<span class="string">"./log/NFA.txt"</span>, NFAStr.toString());</span><br><span class="line">fileUtil.writeFile(<span class="string">"./log/DFA.txt"</span>, DFAStr.toString());</span><br><span class="line">fileUtil.writeFile(<span class="string">"./log/MinDFA.txt"</span>, MinDFAStr.toString());</span><br><span class="line">fileUtil.writeFile(<span class="string">"./log/FinalMinDFA.txt"</span>, finalDfa.toString());</span><br></pre></td></tr></table></figure>
-
-<p>若想更改NFA等数据结构信息存储文件直接修改对应代码即可.<br>若想改变正规式/源程序/输出结果文件路径,程序提供了FileUtil的重载函数如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileUtil</span><span class="params">(String input, String output, String reg)</span> </span>&#123;</span><br><span class="line">    inputFilePath = input;</span><br><span class="line">    outputFilePath = output;</span><br><span class="line">    regularExpressionPath = reg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="正规式-gt-NFA"><a href="#正规式-gt-NFA" class="headerlink" title="正规式-&gt;NFA"></a>正规式-&gt;NFA</h3><p>&emsp; &emsp; 对于一个正规式,我们可以将其看作一个表达式.表达式中的操作数为字母表中的字符,表达式中的操作符包括.(连接),|(或运算),*(星闭包),+(正闭包)以及用于表达优先级的().<br>每个操作数可以看做单字符的汤普森表示,例如a|b可以表达为:</p>
-<p>操作数:</p>
-<p><img src="https://s1.ax1x.com/2020/04/12/GLKB1f.png" alt="GLKB1f.png"></p>
-<p>操作符:</p>
-<p><img src="https://s1.ax1x.com/2020/04/12/GLMk4I.png" alt="GLMk4I.png"></p>
-<p>&emsp; &emsp; 所以,正规式到NFA只是一个简单的表达式求值过程.有点特殊的是,.(连接符)是缺省的,故我们需手动补齐.例如abc我们将其补全为a.b.c</p>
-<h4 id="核心算法"><a href="#核心算法" class="headerlink" title="核心算法"></a>核心算法</h4><p>整个算法的主要流程图如下,图中省略了部分细节</p>
-<p><img src="https://s1.ax1x.com/2020/04/12/GLlh9I.png" alt="GLlh9I.png"></p>
-<p>字符读取完成后,还需要计算操作数栈,操作符栈中表达式,其过程类似上图中操作符分支,故此处不再赘叙.</p>
-<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>NFA的数据结构如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NFA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Vertex&gt; states;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Trans&gt; transitions;</span><br><span class="line">    <span class="comment">// 对于一个正规式而言,只会有一个终态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> finalState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们默认状态0为初态,故数据结构中无需记录初态.下面给出Vertex与Trans的数据结构:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vertex</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顶点状态,应该与顶点索引保持一致</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> state;</span><br><span class="line">    <span class="comment">// 是否为终态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isFinal;</span><br><span class="line">    <span class="comment">// 类型</span></span><br><span class="line">    <span class="keyword">public</span> String type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trans</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> stateFrom, stateTo;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span> transSymbol;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>如果阅读Thompson.java的源码,会发现其中实现交,并,闭包等的操作函数形式如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * *闭包</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n 操作数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 返回*闭包的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NFA <span class="title">kleene</span><span class="params">(NFA n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// todo...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&emsp; &emsp; 熟悉java的人可能会认为由于类的引用机制,完全可以对n进行修改而没必要返回一个新的NFA.的确,这样做似乎可以节省一些空间.但个人认为这么做带来的坏处更大.<br>&emsp; &emsp; 首先,NFA中的states是ArrayList类型,*闭包需要添加一个新的初态,这意味着需要执行一次插入操作.对一个随机访问型的列表执行插入操作是十分耗时的(最后生成的NFA可能有几百个结点,这意味一次插入操作需要移动几百个结点).那如果改用LinkedList呢?答案是否定的,因为我们需要随机访问.那这么做会浪费很多空间吗?不见得,java的gc机制会自动帮我们回收空间.<br>&emsp; &emsp; 最后再说一点,过多的依赖引用可能会造成高耦合低内聚.这意味着可能你在某个地方修改了某个变量的值,导致整个程序崩溃,这也是我宁愿多花费一点空间的原因.<br>&emsp; &emsp; 接下来思考另一个问题.熟悉java多态的人可能会认为在声明属性时可以使用List声明,等到需要实例化时再给予具体的类型.确实,利用多态可以为我们省下许多功夫,但是他也有着他的限制性.<br>&emsp; &emsp; 如果所有属性都采用接口声明,很有可能你需要在某些时刻进行一些强制类型转换(例如你需要调用LinkedList中的方法,但你使用List接口声明),他们的代码看起来可能是这样的:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( someValues <span class="keyword">instanceof</span> someClass)&#123;</span><br><span class="line">    <span class="comment">// do class cast</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// do other thing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>考虑到强制转换类型可能失败,我们还需要添加一段try-catch:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( someValues <span class="keyword">instanceof</span> someClass)&#123;</span><br><span class="line">    <span class="comment">// do class cast</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// do other thing</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    <span class="comment">// do some thing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&emsp; &emsp;现在问题暴露出来了,使用接口的确能使我们的代码更抽象,但也给我们带来了很多麻烦.而且过多的依赖接口也说明你对算法的流程掌握不到位,你无法正确的选择数据结构.</p>
-<p><strong>以上的两个问题在整个词法分析过程中皆有出现.这两个问题困扰了我很久,可能我做出的选择对程序不是最优解,但对写代码来的人来讲也不是最差解.</strong></p>
-<h3 id="NFA转DFA"><a href="#NFA转DFA" class="headerlink" title="NFA转DFA"></a>NFA转DFA</h3><p>NFA转DFA的算法课本上已经将的十分详尽了,故此处不再赘述.这里只简单介绍数据结构以及部分注意事项.</p>
-<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p>DFA:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DFA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;DVertex&gt; Dstates = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;Trans&gt; Dtrans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 每个顶点的状态转移集的集合,即transitions.get(i)为顶点i的状态转移</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Trans&gt;&gt; transitions;</span><br><span class="line">    <span class="comment">// 类似transitions,transMaps为每个顶点的状态转移映射的集合</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;HashMap&lt;Character, Integer&gt;&gt; transMaps;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>DVertex:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DVertex DFA中的顶点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DVertex</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">public</span> HashSet&lt;Integer&gt; states;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isFinal = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">public</span> String type = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补充说明-1"><a href="#补充说明-1" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;可以看到,创建了一个二维数组transitions以及一个HashMap的集合transMaps.二者都是状态转移的辅助描述.<br>&emsp; &emsp;transitions的作用是:当你需要获得顶点n的所有状态转移时,你可以调用transitions.get(n)而非去迭代遍历Dtrans并添加if判断.学习过计算机组成原理的人知道,CPU是以超标量流水线方式工作的,也就是说CPU希望执行的指令是连续的,if判断会产生一条jump指令,这会使程序性能下降.<br>&emsp; &emsp;transMaps的作用是:当你需要知道顶点n经字符c转移后得到的状态时,你可以调用transMaps.get(n).get(c)而非去transitions中查找.哈希查找的时间复杂度为O(1).</p>
-<h3 id="DFA最小化"><a href="#DFA最小化" class="headerlink" title="DFA最小化"></a>DFA最小化</h3><p>DFA最小化需要不断回溯,这里采用一种比较特殊的手段,可以不借助递归也不借助栈即可实现回溯.</p>
-<h4 id="核心算法-1"><a href="#核心算法-1" class="headerlink" title="核心算法"></a>核心算法</h4><p>&emsp; &emsp;初次划分时,我们将终态置于组0,其他置于组1.这与之间的设定完全相反(一般地,我们认为编号0是初态而终态为编号最大值),这是因为我们只需要对非终态进行划分,这样做使得只需从组1开始扫描.当然,你也可以保持终态为1,然后每次反向扫描.<br>&emsp; &emsp;接下来我们开始检查组1,我们默认每个组的第一个元素为改组代表,所有与代表不同组的元素我们添加到一个新的组中.而且一旦发现新的组别,我们需重置迭代索引来实现回溯.<br>&emsp; &emsp;最终,我们直接以组号代表该小组.</p>
-<p>主要流程图如下:<br><a href="https://imgchr.com/i/GL4TMR" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GL4TMR.png" alt="GL4TMR.png"></a></p>
-<h4 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h4><p>这里再给出一个实例,假设有如下DFA结点0,1,2,3,4.其中4为终态.最终划分结果为每个结点各一组.</p>
-<ol>
-<li>初次划分g0={4},g1={0,1,2,3}.</li>
-<li>遍历g1,发现1,2,3皆与0不同组,将其加入g2.目前g1={0},g2={1,2,3}.</li>
-<li>重新遍历,g1通过.遍历g2,发现2与1不同组,将其加入g3,得到g2={1,2},g3={3}.</li>
-<li>重新遍历,g1通过.由于2被划分到g3,3与1此时不同组,将其加入g4.得到g2={1},g3={3},g4={2}.</li>
-<li>重新遍历,均通过,以组号作为该组代表编号,结束划分.</li>
-</ol>
-<h4 id="数据结构-2"><a href="#数据结构-2" class="headerlink" title="数据结构"></a>数据结构</h4><p>由于在最小化DFA过程中打乱了顺序,故我们需要记录初态</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MinDFA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> inital;<span class="comment">// 初态</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;DVertex&gt; Dstates = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;HashMap&lt;Character, Integer&gt;&gt; transMaps = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="MinDFA合并"><a href="#MinDFA合并" class="headerlink" title="MinDFA合并"></a>MinDFA合并</h3><p>&emsp; &emsp;至此,我们已经为每个正规式得到了其最小化的DFA,即MinDFA.接下来我们需要将这些DFA合并成一个大的DFA.<br>DFA的合并与汤普森算法中的|操作非常相似,只不过DFA的合并是将所有初态合并为一个新初态,并且不添加新的终态.</p>
-<h4 id="核心算法-2"><a href="#核心算法-2" class="headerlink" title="核心算法"></a>核心算法</h4><p>算法主要流程图如下:</p>
-<p><a href="https://imgchr.com/i/GLTIk6" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GLTIk6.png" alt="GLTIk6.png"></a></p>
-<h4 id="补充说明-2"><a href="#补充说明-2" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;在计算DFA结点新编号时,需要注意结点编号小于初态与结点编号大于初态的偏移量是不同的.这是因为所有初态被合并至一个新初态.例如:当我们合并第一个DFA时,偏移量=1(因为已经有一个公共初态结点0).设该DFA中Dstates为{0,1,2,3},其中1为初态.</p>
-<p>&emsp; &emsp;合并DFA时各个结点的新结点分别为:</p>
-<ol>
-<li>0=0+1=1</li>
-<li>1=0(被合并至公共初态)</li>
-<li>2=2+1-1=2(初态结点被合并)</li>
-<li>3=3+1-1=3(初态结点被合并)</li>
-</ol>
-<p>现在来解释前文提到的</p>
-<blockquote>
-<p>请确保你的正规式最终生成的最小化DFA中,终态不包含初态.</p>
-</blockquote>
-<p>来看一个例子,正规式a*得到的MinDFA如下:</p>
-<p><img src="https://s1.ax1x.com/2020/04/13/GvyyVO.png" alt="GvyyVO.png"></p>
-<p>&emsp; &emsp;可以发现0既是初态又是终态,而每个正规式的初态都会被合并到一个公共初态.发现问题了吗?合并后的MinDFA的初态是唯一的,而这个唯一的初态也是终态.在分组过程中我们似乎很难对其划分.这也是这条规定的由来.</p>
-<p>&emsp; &emsp;如果你定义了这样的正规式,可能会缺少终态但保留状态转移,可能会使程序崩溃.这取决于你的正规式内容,你的正规式位置以及其他的正规式.总而言之,请避免这样的行为.</p>
-<p>&emsp; &emsp;还需注意的是,多个MinDFA合并后得到的并非是MinDFA,严格来讲,可能合并结果连DFA都不是.举个例子,有如下两个DFA:</p>
-<p><a href="https://imgchr.com/i/GLbyff" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GLbyff.png" alt="GLbyff.png"></a></p>
-<p>合并后会得到:<br><img src="https://s1.ax1x.com/2020/04/12/GLbot0.png" alt="GLbot0.png"></p>
-<p>&emsp; &emsp;可以看出,结点0接受字符/时有两条状态转移,这不符合DFA的定义.在编码中,由于使用HashSet,第二个DFA会覆盖第一个DFA,也就是说最终得到的DFA不接受字符/.好在目前的正规式不会有这样的冲突.</p>
-<p>&emsp; &emsp;那是否有什么办法能够补救?似乎可以将合并结果设置为NFA,然后再执行一次NFA-&gt;DNF-&gt;MinDFA.但很遗憾,这很难做到.对比MinDFA和DFA以及NFA的数据结构,我们发现MinDFA舍弃很多辅助信息.因为的确不需要这些信息,所以我们现在想通过MinDFA反推得到NFA会变成一件很麻烦的事.</p>
-<p>&emsp; &emsp;更好的解决办法是:在得到各个正规式的NFA时候对其进行合并.这也很符合我们的逻辑,C语言从词法上无非就是各个正规式并操作之后取闭包,即(ID|NUMBER|……)*.但这么做还要考虑下面两个问题:</p>
-<ol>
-<li>对终态的描述需要做出改变,合并后的NFA不止有一个终态.而汤普森算法得到的NFA只有一个终态,这意味着我们的数据结构需要做出改变.</li>
-<li>程序难以调试,仅ID一个正则式的NFA顶点数目已经上百,多个正规式合并后可能由上千个顶点和更多的状态转移.</li>
-</ol>
-<p>综上,采取对MinDFA合并而非对NFA合并即考虑了词法分析的实现度,又考虑到了编写代码人员的工作量.</p>
-<h3 id="后续过程"><a href="#后续过程" class="headerlink" title="后续过程"></a>后续过程</h3><p>后续过程可参考我的另一篇博客:<a href="https://wengyuxian.work/lexical-analyze/" target="_blank" rel="noopener">后续过程</a><br>这里只做简单介绍</p>
-<h4 id="核心算法-3"><a href="#核心算法-3" class="headerlink" title="核心算法"></a>核心算法</h4><p><img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png"></p>
-<h4 id="补充说明-3"><a href="#补充说明-3" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;上述流程存在一定问题,来看一个例子:123abc.显然,这既不符合ID的正规式也不符合NUMBER的正规式,但是程序会将其识别为两个Token:NUMBER 123与ID abc.原因在于:当程序扫描到字符a时,发现无状态转移且123已经位于终态NUMBER,故将其识别成两部分.<br>&emsp; &emsp;这么做是否有必要?为什么我们不在无状态转移时直接抛出错误呢?来看一个例子:if(true).理想情况下我们应该得到四个Token:if,(,true,).我们并不希望扫描到(时发现无法状态转移而直接认定这是一个错误的字符,而我们不能也不该强制要求各个单词之间必须以空格分隔,所以采取了这种折中的办法.<br>&emsp; &emsp;另外一点好处是:可以满足最长匹配.例如&gt;和&gt;=都属于运算符,当程序中出现&gt;=时我们希望得到一个Token:OPERATOR &gt;=而非两个,上述算法能满足这个需求.换而言之,这种行为是贪婪的.<br>&emsp; &emsp;有没有更好的解决方法呢?有的.我们规定一组分隔符,例如{‘(‘,’)’,’;’,….}.当我们发现无状态转移时只要检查字符是否属于分隔符,如果不是分隔符则应当判定为错误.诚然,这么做似乎能解决上述两个问题,但同时也有两个问题是需要我们思考的:</p>
-<ol>
-<li>有哪些元素属于分隔符?仔细想想可能(,[,{,+,-等都能成为分隔符.这意味着我们模糊了每个字符的定位,每个字符扮演的角色摸棱两可.而且((}}这样由分隔符组成的Token依旧能被识别.</li>
-<li>这种做法是否保留了状态转移的思想?似乎没有,这种做法似乎越来越向硬编码靠近了.</li>
-</ol>
-<h2 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h2><h3 id="汤普森算法"><a href="#汤普森算法" class="headerlink" title="汤普森算法"></a>汤普森算法</h3><p>&emsp; &emsp;设有n个正规式,每个正规式平均有k个字符分别用m1,m2…mk表示.字符间的操作考虑复杂度高的|操作.即正规式为m1|m2|m3…</p>
-<p>最终生成的NFA大概如下:(图中省略了部分信息,例如结点编号,例如转移转移标识符)</p>
-<p><img src="https://s1.ax1x.com/2020/04/13/GvWkKs.png" alt="GvWkKs.png"></p>
-<p>生成一条状态转移的时间复杂度为O(1),下面来分析过程:</p>
-<ol>
-<li>m1,m2状态转移数目为:1,1.m1|m2得到1+1+4=6条状态转移.</li>
-<li>m1|m2,m3状态转移数目为:6,1.m1|m2得到6+1+4=10条状态转移.</li>
-<li>m1|m2|m3,m4状态转移数目为:10,1.m1|m2得到10+1+4=14条状态转移.</li>
-</ol>
-<p>不难看出,这是一个等差数列.所以该部分时间复杂度为O(k^2).<br>综上,汤普森算法的时间复杂度为O(n*k^2).</p>
-<h3 id="NFA-gt-DFA"><a href="#NFA-gt-DFA" class="headerlink" title="NFA-&gt;DFA"></a>NFA-&gt;DFA</h3><p>&emsp; &emsp;设字母表有n个元素,NFA中有m个结点.由于使用Hash,状态转移的数目不影响查找状态转移的速率,时间复杂度为O(1).<br>&emsp; &emsp;表达式中有大量的并操作会导致时间复杂度的急剧上升,如果查看log中文件,可以发现ID的NFA,DFA结点数目都为460.也就是说,每次求空闭包的时间复杂度可高达O(m).对每个结点,我们要求n次:<br>&emsp; &emsp;空闭包(smove(m1,字母表中元素))<br>&emsp; &emsp;生成一个结点后需要查找改结点是否存在,该部分时间复杂度为1+2+3+..m(参考ID的DFA数目与NFA数目相同,这里考虑最差情况),即O(m^2).<br>故最差时间复杂度为O(nm^2)+O(m^2),即O(nm^2)<br>最优时间复杂度即为只有连接操作,求空闭包时间幅度为O(1).<br>综上,NFA-&gt;DFA部分时间复杂度为O(nm^2)</p>
-<h3 id="DFA-gt-MinDFA"><a href="#DFA-gt-MinDFA" class="headerlink" title="DFA-&gt;MinDFA"></a>DFA-&gt;MinDFA</h3><p>设有n个非终态结点.<br>最差情况为n个结点属于n个分组.这里给出一个例子,设n=5.</p>
-<table>
-<thead>
-<tr>
-<th align="center">扫描组号</th>
-<th align="center">扫描组内容</th>
-<th align="center">扫描次数</th>
-<th align="center">分组情况</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">12345</td>
-<td align="center">5</td>
-<td align="center">12345</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1,2345</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">2345</td>
-<td align="center">4</td>
-<td align="center">1,2,345</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1,2,345</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">1,2,345</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">345</td>
-<td align="center">3</td>
-<td align="center">1,2,3,45</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1,2,3,45</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">1,2,3,45</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">1</td>
-<td align="center">1,2,3,45</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">45</td>
-<td align="center">2</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">1</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">4</td>
-<td align="center">1</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">5</td>
-<td align="center">1</td>
-<td align="center">1,2,3,4,5</td>
-</tr>
-</tbody></table>
-<p>&emsp; &emsp;先忽略扫描次数为1的,可以看到1扫描了5次,2扫描了4次,3扫描了3次……显然这是一个等差数列,故这部分时间复杂度为O(n^2).<br>&emsp; &emsp;再来看扫描次数为1的,可以看到1重复扫描了4次,2扫描了3次……同样的,这也是一个等差数列,时间复杂度同为O(n^2)<br>&emsp; &emsp;故最差时间复杂度为O(n^2)<br>&emsp; &emsp;当只有一个分组时时间复杂度最优,为O(n)<br>综上,DFA-&gt;MinDFA时间复杂度为O(n^2)</p>
-<h3 id="合并DFA"><a href="#合并DFA" class="headerlink" title="合并DFA"></a>合并DFA</h3><p>该部分时间复杂度计算比较简单,设最终共有n个顶点,m条状态转移.时间复杂度为O(n)+O(m)</p>
-
+      
+      <a class="article-more-link" href="/lexical-analyze-pro/">阅读更多...</a>
+      
       
       <!-- reward -->
       
@@ -498,40 +257,9 @@
 
       
       <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>使用JAVA实现简单的词法分析,支持识别C语言中关键字,标识符,运算符等.</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h4><blockquote>
-<p>由于作图工具限制无法画同心圆,故图中红色圆为终态,每个终态(上方或右方)配有一段关于终态的文字描述</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2020/04/02/GG8r8K.png" alt="GG8r8K.png"></p>
-<h4 id="设计数据结构"><a href="#设计数据结构" class="headerlink" title="设计数据结构"></a>设计数据结构</h4><ol>
-<li>枚举类的设计<br>在DFA中,为每个终态顶点设置了一段文字说明.故设计一个枚举类,里面包含所有的终态顶点类型<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * VertexType</span></span><br><span class="line"><span class="comment"> * 顶点类型的枚举类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> VertexType &#123;</span><br><span class="line">    ID, <span class="comment">// 标识符</span></span><br><span class="line">    KEYWORD, <span class="comment">// 关键字</span></span><br><span class="line">    NUMBER, <span class="comment">// 数字</span></span><br><span class="line">    SEPARATOR, <span class="comment">// 分隔符</span></span><br><span class="line">    BRACKET, <span class="comment">// 括号</span></span><br><span class="line">    COMMENT, <span class="comment">// 评论</span></span><br><span class="line">    ARI_OPERATOR, <span class="comment">// 算术运算符</span></span><br><span class="line">    lOG_OPERATOR, <span class="comment">// 逻辑运算符</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号</span></span><br><span class="line">    COMP_OPERATOR, <span class="comment">// 比较运算符</span></span><br><span class="line">    WHITESPACE, <span class="comment">// 空白符</span></span><br><span class="line">    NEWLINE, <span class="comment">// 换行符</span></span><br><span class="line">    SIMICOLON, <span class="comment">// 分号</span></span><br><span class="line">    ERROR,<span class="comment">// 错误符号</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-同时,针对图中的每条边的权,也设计了一个枚举类.<br>这么做的优点是能有效减少顶点之间的路径,缺点则是失去了部分灵活性.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CharType</span></span><br><span class="line"><span class="comment"> * 字符类型的枚举</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CharType &#123;</span><br><span class="line">    LETTER,         <span class="comment">// 字母 a-z A-Z _</span></span><br><span class="line">    DIGIT,          <span class="comment">// 数字 0-9</span></span><br><span class="line">    DOT,            <span class="comment">// 点 .</span></span><br><span class="line">    SLASH,          <span class="comment">// 斜杠 /</span></span><br><span class="line">    ARI_OPERATOR,   <span class="comment">// 算数运算符 +-*%</span></span><br><span class="line">    lOG_OPERATOR,   <span class="comment">// 逻辑运算符 &amp;|!</span></span><br><span class="line">    EQUAL_OPERATOR, <span class="comment">// 等于号 =</span></span><br><span class="line">    COMP_OPERATOR,  <span class="comment">// 比较运算符 &gt;&lt;</span></span><br><span class="line">    BRACKET,        <span class="comment">// 括号 ()[]&#123;&#125;</span></span><br><span class="line">    SIMECOLON,      <span class="comment">// 分号与逗号</span></span><br><span class="line">    WHITESPACE,     <span class="comment">// 空格 正则中\s对应的除\n以外的空白符</span></span><br><span class="line">    NEWLINE         <span class="comment">// 换行 \n</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>设计顶点类<br>顶点类应当至少包含三个信息:状态,是否为终态,类型(或者说对顶点的描述)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Vertex 顶点类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vertex</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 顶点状态,与顶点在数组的索引一致</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;</span><br><span class="line">    <span class="comment">// 是否为终态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isFinal;</span><br><span class="line">    <span class="comment">// 顶点类型</span></span><br><span class="line">    <span class="keyword">private</span> VertexType type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图的设计<br>从上图可看出,该DFA是一个拥有16个节点的单向带权图.由于图中路径较少,为降低空间复杂度,不采用邻接矩阵结构.同时发现:无须求两个顶点之间的距离,故也不采用邻接链表.<br>由于只需要通过当前顶点以及当前输入字符的类型来确定状态转移后的顶点<br>故使用一个HashSet&lt;CharType, Integer&gt;数组来存放所有的边,key为输入字符,value为跳转的顶点,这样可使状态转移的时间复杂度降低为O(1)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 状态转移</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i        当前顶点索引</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> charType 字符类型,即边的权</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 若存在状态转移,则返回转移后的顶点.否则返回null</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Vertex <span class="title">transfer</span><span class="params">(<span class="keyword">int</span> i, CharType charType)</span> </span>&#123;</span><br><span class="line">    Object srcIndex = edges[i].get(charType);</span><br><span class="line">    <span class="keyword">return</span> srcIndex == <span class="keyword">null</span> ? <span class="keyword">null</span> : vertexs[(<span class="keyword">int</span>) srcIndex];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="分析算法流程"><a href="#分析算法流程" class="headerlink" title="分析算法流程"></a>分析算法流程</h4><p>整个算法的流程图如下<br><img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png"><br>除此之外,算法还有许多细节之处.<br>例如,关键字(KEYWORD)与表示符(ID)通过词法分析无法区分.对此,当词法分析结束后,会做进一步的判断,判断关键字的方法很简单,建立一个关键字的HashSet,查找是否存在即可,查找的时间复杂度依然是O(1).</p>
-<h3 id="项目结构介绍"><a href="#项目结构介绍" class="headerlink" title="项目结构介绍"></a>项目结构介绍</h3><p><img src="https://s1.ax1x.com/2020/04/02/G8OWzd.png" alt="G8OWzd.png"></p>
-<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>通过项目结构介绍了解到:默认的输入输出文件位于根目录下.<br>如果想修改文件路径可以打开Analyze.java启动类,修改如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileUtil f = <span class="keyword">new</span> FileUtil();</span><br></pre></td></tr></table></figure>
-
-<p>例如,使用带参数的构造函数更改输入输出文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileUtil f = <span class="keyword">new</span> FileUtil(<span class="string">"Your input path"</span>,<span class="string">"Your output path"</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="样例展示"><a href="#样例展示" class="headerlink" title="样例展示"></a>样例展示</h4><p>input.txt</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">float</span> c,<span class="keyword">float</span> d)</span></span>&#123;</span><br><span class="line">    <span class="comment">//hello analyzer wengyuxian</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">float</span> y;</span><br><span class="line">    x=a+b;</span><br><span class="line">    y=c/d;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;y)</span><br><span class="line">        x=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        y=<span class="number">12.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>output.txt</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">KEYWORD       : void      </span><br><span class="line">ID            : test      </span><br><span class="line">BRACKET       : (         </span><br><span class="line">KEYWORD       : int       </span><br><span class="line">ID            : a         </span><br><span class="line">SEPARATOR     : ,         </span><br><span class="line">KEYWORD       : int       </span><br><span class="line">ID            : b         </span><br><span class="line">SEPARATOR     : ,         </span><br><span class="line">KEYWORD       : float     </span><br><span class="line">ID            : c         </span><br><span class="line">SEPARATOR     : ,         </span><br><span class="line">KEYWORD       : float     </span><br><span class="line">ID            : d         </span><br><span class="line">BRACKET       : )         </span><br><span class="line">BRACKET       : &#123;         </span><br><span class="line">COMMENT       : //hello analyzer wengyuxian</span><br><span class="line">KEYWORD       : int       </span><br><span class="line">ID            : x         </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">KEYWORD       : float     </span><br><span class="line">ID            : y         </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">ID            : x         </span><br><span class="line">EQUAL_OPERATOR: =         </span><br><span class="line">ID            : a         </span><br><span class="line">ARI_OPERATOR  : +         </span><br><span class="line">ID            : b         </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">ID            : y         </span><br><span class="line">EQUAL_OPERATOR: =         </span><br><span class="line">ID            : c         </span><br><span class="line">ARI_OPERATOR  : /         </span><br><span class="line">ID            : d         </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">KEYWORD       : if        </span><br><span class="line">BRACKET       : (         </span><br><span class="line">ID            : x         </span><br><span class="line">COMP_OPERATOR : &gt;         </span><br><span class="line">ID            : y         </span><br><span class="line">BRACKET       : )         </span><br><span class="line">ID            : x         </span><br><span class="line">EQUAL_OPERATOR: =         </span><br><span class="line">NUMBER        : 10        </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">KEYWORD       : else      </span><br><span class="line">ID            : y         </span><br><span class="line">EQUAL_OPERATOR: =         </span><br><span class="line">NUMBER        : 12.5      </span><br><span class="line">SEPARATOR     : ;         </span><br><span class="line">BRACKET       : &#125;</span><br></pre></td></tr></table></figure>
-
+      
+      <a class="article-more-link" href="/lexical-analyze/">阅读更多...</a>
+      
       
       <!-- reward -->
       
@@ -607,34 +335,9 @@
 <blockquote>
 <p>sudo apt-get install flex</p>
 </blockquote>
-<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>首先创建exam.l文件,内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">⁫ 2020&#x2F;3&#x2F;16 20:21:41</span><br><span class="line">sudo apt-get install vim</span><br><span class="line"></span><br><span class="line">⁫ 2020&#x2F;3&#x2F;16 20:22:09</span><br><span class="line">&#x2F;* 这是注释的形式，与C中的&#x2F;*...* &#x2F;注释相同。 *&#x2F;</span><br><span class="line">&#x2F;* 第一部分是定义、声明部分。这部分内容可以为空。*&#x2F;</span><br><span class="line"> </span><br><span class="line">%&#123;</span><br><span class="line"> </span><br><span class="line">&#x2F;* 写在 %&#123;...%&#125;这对特殊括号内的内容会被直接拷贝到C文件中。</span><br><span class="line"> *</span><br><span class="line"> * 这部分通常进行一些头文件声明，变量（全局，外部）、常量</span><br><span class="line"> * 的定义，用C语法。</span><br><span class="line"> *</span><br><span class="line"> * %&#123;和%&#125;两个符号都必须位于行首 </span><br><span class="line"> *&#x2F;</span><br><span class="line"> </span><br><span class="line">&#x2F;* 下面定义了需要识别的记号名，如果和yacc联合使用，这些记号名都应该在yacc中定义 *&#x2F;</span><br><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#define LT					1</span><br><span class="line">#define	LE					2</span><br><span class="line">#define GT					3</span><br><span class="line">#define	GE					4</span><br><span class="line">#define	EQ					5</span><br><span class="line">#define NE					6</span><br><span class="line"> </span><br><span class="line">#define WHILE				18</span><br><span class="line">#define	DO					19</span><br><span class="line">#define ID          20</span><br><span class="line">#define NUMBER      21</span><br><span class="line">#define RELOP       22</span><br><span class="line"> </span><br><span class="line">#define NEWLINE     23</span><br><span class="line">#define ERRORCHAR   24</span><br><span class="line"> </span><br><span class="line">int yylval;</span><br><span class="line">&#x2F;* yylval 是yacc中定义的变量，用来保存记号的属性值，默认是int类型。 </span><br><span class="line"> * 在用lex实现的词法分析器中可以使用这个变量将记号的属性传递给用</span><br><span class="line"> * yacc实现的语法分析器。</span><br><span class="line"> *</span><br><span class="line"> * 注意：该变量只有在联合使用lex和yacc编写词法和语法分析器时才可在lex</span><br><span class="line"> *       中使用，此时该变量不需要定义即可使用。</span><br><span class="line"> *       单独使用lex时，编译器找不到这个变量。这里定义该变量为了“欺骗”编译器。</span><br><span class="line"> *&#x2F;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">%&#125;</span><br><span class="line"> </span><br><span class="line">&#x2F;* 这里进行正规定义和状态定义。</span><br><span class="line"> * 下面就是正规定义，注意，正规定义和状态定义都要顶着行首写。</span><br><span class="line"> *&#x2F;</span><br><span class="line"> </span><br><span class="line">delim		[ \t \n]</span><br><span class="line">&#x2F;* \用来表示转义，例如\t表示制表符，\n表示换行符。*&#x2F;</span><br><span class="line">ws			&#123;delim&#125;+</span><br><span class="line">letter	[A-Za-z_]</span><br><span class="line">digit		[0-9]</span><br><span class="line">id			&#123;letter&#125;(&#123;letter&#125;|&#123;digit&#125;)*</span><br><span class="line">&#x2F;* 注意：上面正规定义中出现的小括号表示分组，而不是被匹配的字符。</span><br><span class="line"> *       而大括号括起的部分表示正规定义名。</span><br><span class="line"> *&#x2F;</span><br><span class="line">number	&#123;digit&#125;+(\.&#123;digit&#125;+)?(E[+-]?&#123;digit&#125;+)?</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#x2F;* %%作为lex文件三个部分的分割符，必须位于行首 *&#x2F;</span><br><span class="line">&#x2F;* 下面这个%%不能省略 *&#x2F;</span><br><span class="line">%%</span><br><span class="line"> </span><br><span class="line">  &#x2F;* 第二部分是翻译规则部分。 *&#x2F;</span><br><span class="line">  &#x2F;* 写在这一部分的注释要有前导空格，否则lex编译出错。*&#x2F;</span><br><span class="line">  &#x2F;* 翻译规则的形式是：正规式  &#123;动作&#125;</span><br><span class="line">   * 其中，正规式要顶行首写，动作要以C语法写（动作会被拷贝到yylex()函数中，），\</span><br><span class="line">   * 正规式和动作之间要用空白分割。</span><br><span class="line">   *&#x2F;</span><br><span class="line">  </span><br><span class="line">&#123;ws&#125;	          &#123;;&#x2F;* 此时词法分析器没有动作，也不返回，而是继续分析。 *&#x2F;&#125;</span><br><span class="line">  &#x2F;* 正规式部分用大括号扩住的表示正规定义名，例如&#123;ws&#125;。</span><br><span class="line">   * 没有扩住的直接表示正规式本身。</span><br><span class="line">   * 一些元字符没办法表示它本身，此时可以用转义字符或</span><br><span class="line">   * 用双引号括起来，例如&quot;&lt;&quot;</span><br><span class="line">   *&#x2F;</span><br><span class="line">while	          &#123;return (WHILE);&#125;</span><br><span class="line">do		          &#123;return (DO);&#125;</span><br><span class="line">&#123;id&#125;	          &#123;yylval &#x3D; installID (); return (ID);&#125;</span><br><span class="line">&#123;number&#125;	      &#123;yylval &#x3D; installNum (); return (NUMBER);&#125;</span><br><span class="line">&quot;&lt;&quot;	            &#123;yylval &#x3D; LT; return (RELOP);&#125;</span><br><span class="line">&quot;&lt;&#x3D;&quot;	          &#123;yylval &#x3D; LE; return (RELOP);&#125;</span><br><span class="line">&quot;&#x3D;&quot;	            &#123;yylval &#x3D; EQ; return (RELOP);&#125;</span><br><span class="line">&quot;&lt;&gt;&quot;	          &#123;yylval &#x3D; NE; return (RELOP);&#125;</span><br><span class="line">&quot;&gt;&quot;	            &#123;yylval &#x3D; GT; return (RELOP);&#125;</span><br><span class="line">&quot;&gt;&#x3D;&quot;	          &#123;yylval &#x3D; GE; return (RELOP);&#125;</span><br><span class="line"> </span><br><span class="line">.								&#123;yylval &#x3D; ERRORCHAR; return ERRORCHAR;&#125;</span><br><span class="line"> &#x2F;*.匹配除换行之外的任何字符，一般可作为最后一条翻译规则。*&#x2F;</span><br><span class="line"> </span><br><span class="line">%%</span><br><span class="line">&#x2F;* 第三部分是辅助函数部分，这部分内容以及前面的%%都可以省略 *&#x2F;</span><br><span class="line">&#x2F;* 辅助函数可以定义“动作”中使用的一些函数。这些函数</span><br><span class="line"> * 使用C语言编写，并会直接被拷贝到lex.yy.c中。</span><br><span class="line"> *&#x2F;</span><br><span class="line"> </span><br><span class="line">int installID () &#123;</span><br><span class="line">  &#x2F;* 把词法单元装入符号表并返回指针。*&#x2F;</span><br><span class="line">	return ID;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int installNum () &#123;</span><br><span class="line">	&#x2F;* 类似上面的过程，但词法单元不是标识符而是数 *&#x2F;</span><br><span class="line">  return NUMBER;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#x2F;* yywrap这个辅助函数是词法分析器遇到输入文件结尾时会调用的，用来决定下一步怎么做：</span><br><span class="line"> * 若yywrap返回0，则继续扫描；返回1，则词法分析器返回报告文件已结束的0。</span><br><span class="line"> * lex库中的标准yywrap程序就是返回1，你也可以定义自己的yywrap。</span><br><span class="line"> *&#x2F;</span><br><span class="line">int yywrap ()&#123;</span><br><span class="line">  return 1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void writeout(int c)&#123;</span><br><span class="line">  switch(c)&#123;</span><br><span class="line">  	case ERRORCHAR: fprintf(yyout, &quot;(ERRORCHAR, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">  	case RELOP: fprintf(yyout, &quot;(RELOP, \&quot;%s\&quot;) &quot;, yytext);break;  	  </span><br><span class="line">    case WHILE: fprintf(yyout, &quot;(WHILE, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case DO: fprintf(yyout, &quot;(DO, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case NUMBER: fprintf(yyout, &quot;(NUM, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case ID: fprintf(yyout, &quot;(ID, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case NEWLINE: fprintf(yyout, &quot;\n&quot;);break;</span><br><span class="line">    default:break;</span><br><span class="line">  &#125;</span><br><span class="line">  return;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#x2F;* 辅助函数里可以使用yytext和yyleng这些外部定义的变量。</span><br><span class="line"> * yytext指向输入缓冲区当前词法单元(lexeme)的第一个字符，</span><br><span class="line"> * yyleng给出该词法单元的长度		*&#x2F;</span><br><span class="line"> </span><br><span class="line">&#x2F;* 如果你的词法分析器并不是作为语法分析器的子程序，</span><br><span class="line"> * 而是有自己的输入输出，你可以在这里定义你的词法</span><br><span class="line"> * 分析器的main函数，main函数里可以调用yylex()</span><br><span class="line"> *&#x2F;</span><br><span class="line"> </span><br><span class="line">int main (int argc, char ** argv)&#123;</span><br><span class="line">	int c,j&#x3D;0;</span><br><span class="line">	if (argc&gt;&#x3D;2)&#123;</span><br><span class="line">	  if ((yyin &#x3D; fopen(argv[1], &quot;r&quot;)) &#x3D;&#x3D; NULL)&#123;</span><br><span class="line">	    printf(&quot;Can&#39;t open file %s\n&quot;, argv[1]);</span><br><span class="line">	    return 1;</span><br><span class="line">	  &#125;</span><br><span class="line">	  if (argc&gt;&#x3D;3)&#123;</span><br><span class="line">	    yyout&#x3D;fopen(argv[2], &quot;w&quot;);</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;* yyin和yyout是lex中定义的输入输出文件指针，它们指明了</span><br><span class="line">	 * lex生成的词法分析器从哪里获得输入和输出到哪里。</span><br><span class="line">	 * 默认：键盘输入，屏幕输出。 </span><br><span class="line">	 *&#x2F;</span><br><span class="line">	while (c &#x3D; yylex())&#123;</span><br><span class="line">		writeout(c);</span><br><span class="line">		j++;</span><br><span class="line">		if (j%5 &#x3D;&#x3D; 0) writeout(NEWLINE);</span><br><span class="line">	&#125;</span><br><span class="line">	if(argc&gt;&#x3D;2)&#123;</span><br><span class="line">	  fclose(yyin);</span><br><span class="line">	  if (argc&gt;&#x3D;3) fclose(yyout);</span><br><span class="line">	&#125;</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>lex的基本语法如下</p>
-<blockquote>
-<p>lex [选项] [文件]</p>
-</blockquote>
-<p>这里我们只需使用最简单的命令</p>
-<blockquote>
-<p>lex exam.l</p>
-</blockquote>
-<p>然后我们会得到一个lex.yy.c文件,对其编译并执行</p>
-<blockquote>
-<p>gcc -o exam lex.yy.c<br>./exam</p>
-</blockquote>
-<p>程序运行后可以通过键盘输入需要识别的单词,识别结果将输出在屏幕<br><img src="https://s1.ax1x.com/2020/03/21/8WXnUS.png" alt="8WXnUS.png"></p>
-<p>当然,你也可以使用如下命令指定输入文件和输出文件</p>
-<blockquote>
-<p>./exam [inputFile] [outputfile]</p>
-</blockquote>
-<h5 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h5><p>在翻译规则段还可以定义状态的转移,使用%s 状态名 可以定义新状态.<br>默认状态为INITIAL<br>状态转移的语法如下:<br>&lt;状态一&gt;条件 &lt;状态二&gt;<br>例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;*定义段*&#x2F;</span><br><span class="line"> %%</span><br><span class="line"> ......</span><br><span class="line"> &#x2F;*声明状态*&#x2F;</span><br><span class="line"> %s COMMENT</span><br><span class="line"> %%</span><br><span class="line"> &#x2F;*词法规则段*&#x2F;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#x2F;*&quot;		&#123;printf(&quot;begin comment\n&quot;);BEGIN COMMENT;&#125;</span><br><span class="line">&lt;COMMENT&gt;&quot;*&#x2F;&quot;		&#123;printf(&quot;end comment,begin inital\n&quot;);BEGIN INITIAL;&#125;</span><br><span class="line">&lt;COMMENT&gt;.|\n		&#123;;&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#x2F;&#x2F;&quot;		&#123;printf(&quot;begin comment\n&quot;);BEGIN COMMENT2;&#125;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-
-<p>下面给出一份示例代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 把注释去掉 *&#x2F;</span><br><span class="line"> </span><br><span class="line">%&#123;</span><br><span class="line"> </span><br><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#define LT					1</span><br><span class="line">#define	LE					2</span><br><span class="line">#define GT					3</span><br><span class="line">#define	GE					4</span><br><span class="line">#define	EQ					5</span><br><span class="line">#define NE					6</span><br><span class="line"> </span><br><span class="line">#define	KEYWORD					19</span><br><span class="line">#define ID          20</span><br><span class="line">#define NUMBER      21</span><br><span class="line">#define KEYSYMBOL       22</span><br><span class="line"> </span><br><span class="line">#define NEWLINE     23</span><br><span class="line">#define ERRORCHAR   24</span><br><span class="line">#define ADD                       25</span><br><span class="line">#define  DEC                         26</span><br><span class="line">#define  MUL                         27</span><br><span class="line">#define  DIV                        28</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">%&#125;</span><br><span class="line"> </span><br><span class="line">delim		[ \t \n]</span><br><span class="line">ws			&#123;delim&#125;+</span><br><span class="line">letter	[A-Za-z_]</span><br><span class="line">digit		[0-9]</span><br><span class="line">id			&#123;letter&#125;(&#123;letter&#125;|&#123;digit&#125;)*</span><br><span class="line">number	&#123;digit&#125;+(\.&#123;digit&#125;+)?(E[+-]?&#123;digit&#125;+)?</span><br><span class="line">keyword int|char|double|float|short|do|while|for|return</span><br><span class="line">keysymbol &lt;|&lt;&#x3D;|&gt;|&gt;&#x3D;|&#x3D;|&#x3D;&#x3D;|+|-|*|&#x2F;|%|&amp;|\||^|!|&amp;&amp;|\|\|</span><br><span class="line">pointer &#123;keyword&#125;(\*)* </span><br><span class="line"> </span><br><span class="line"> &#x2F;* 状态（或条件）定义可以定义在这里 </span><br><span class="line"> * INITIAL是一个默认的状态，不需要定义</span><br><span class="line"> *&#x2F;</span><br><span class="line">%s COMMENT</span><br><span class="line">%s COMMENT2</span><br><span class="line">%%</span><br><span class="line"> </span><br><span class="line">&lt;INITIAL&gt;&quot;&#x2F;*&quot;		&#123;printf(&quot;(begin comment)\n&quot;);BEGIN COMMENT;&#125;</span><br><span class="line">&lt;COMMENT&gt;&quot;*&#x2F;&quot;		&#123;printf(&quot;(end comment,begin inital)\n&quot;);BEGIN INITIAL;&#125;</span><br><span class="line">&lt;COMMENT&gt;.|\n		&#123;;&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#x2F;&#x2F;&quot;		&#123;printf(&quot;(begin comment)\n&quot;);BEGIN COMMENT2;&#125;</span><br><span class="line">&lt;COMMENT2&gt;\n		&#123;printf(&quot;(end comment,begin inital)\n&quot;);BEGIN INITIAL;&#125;</span><br><span class="line">&lt;COMMENT2&gt;.			&#123;;&#125;</span><br><span class="line"> </span><br><span class="line"> &#x2F;* ECHO是一个宏，相当于 fprintf(yyout, &quot;%s&quot;, yytext)*&#x2F;</span><br><span class="line"> </span><br><span class="line">&lt;INITIAL&gt;&#123;ws&#125;	          &#123;;&#125;</span><br><span class="line">&lt;INITIAL&gt;&#123;keyword&#125;		  &#123;return (KEYWORD);&#125;</span><br><span class="line">&lt;INITIAL&gt;&#123;id&#125;	          &#123;return (ID);&#125;</span><br><span class="line">&lt;INITIAL&gt;&#123;number&#125;	      &#123;return (NUMBER);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&lt;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&lt;&#x3D;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#x3D;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;!&#x3D;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&gt;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&gt;&#x3D;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;(&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;)&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#123;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#125;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;+&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;-&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;*&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;&#x2F;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line">&lt;INITIAL&gt;&quot;;&quot;	          &#123;return (KEYSYMBOL);&#125;</span><br><span class="line"> </span><br><span class="line">&lt;INITIAL&gt;.				  &#123;return ERRORCHAR;&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">%%</span><br><span class="line"> </span><br><span class="line">int yywrap ()&#123;</span><br><span class="line">  return 1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void writeout(int c)&#123;</span><br><span class="line">  switch(c)&#123;</span><br><span class="line">  	case ERRORCHAR: fprintf(yyout, &quot;(ERRORCHAR, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">  	case KEYSYMBOL: fprintf(yyout, &quot;(KEYSYMBOL, \&quot;%s\&quot;) &quot;, yytext);break;  	  </span><br><span class="line">    case KEYWORD: fprintf(yyout, &quot;(KEYWORD, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case NUMBER: fprintf(yyout, &quot;(NUM, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case ID: fprintf(yyout, &quot;(ID, \&quot;%s\&quot;) &quot;, yytext);break;</span><br><span class="line">    case NEWLINE: fprintf(yyout, &quot;\n&quot;);break;</span><br><span class="line">    default:break;</span><br><span class="line">  &#125;</span><br><span class="line">  return;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int main (int argc, char ** argv)&#123;</span><br><span class="line">	int c,j&#x3D;0;</span><br><span class="line">	if (argc&gt;&#x3D;2)&#123;</span><br><span class="line">	  if ((yyin &#x3D; fopen(argv[1], &quot;r&quot;)) &#x3D;&#x3D; NULL)&#123;</span><br><span class="line">	    printf(&quot;Can&#39;t open file %s\n&quot;, argv[1]);</span><br><span class="line">	    return 1;</span><br><span class="line">	  &#125;</span><br><span class="line">	  if (argc&gt;&#x3D;3)&#123;</span><br><span class="line">	    yyout&#x3D;fopen(argv[2], &quot;w&quot;);</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	while (c &#x3D; yylex())&#123;</span><br><span class="line">		writeout(c);</span><br><span class="line">    	writeout(NEWLINE);</span><br><span class="line">	&#125;</span><br><span class="line">	if(argc&gt;&#x3D;2)&#123;</span><br><span class="line">	  fclose(yyin);</span><br><span class="line">	  if (argc&gt;&#x3D;3) fclose(yyout);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>按照前文所述,运行代码后可得到结果<br><img src="https://s1.ax1x.com/2020/03/21/8Wz4Ff.png" alt="8Wz4Ff.png"></p>
-
+      
+      <a class="article-more-link" href="/lex-study/">阅读更多...</a>
+      
       
       <!-- reward -->
       
@@ -680,11 +383,6 @@
       </li>
       <li>
         
-        Powered by
-        
-        
-        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
-        
       </li>
     </ul>
     <ul class="list-inline">
@@ -710,7 +408,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="Weng"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt=""></a>
   </div>
   
   <ul class="nav nav-main">
