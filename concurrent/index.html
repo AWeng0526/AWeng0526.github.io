@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    你好 |  Weng
+    Java并发编程之美读书笔记 |  Weng
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -41,7 +41,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-Index" class="article article-type-post" itemscope
+  <article id="post-concurrent" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -49,7 +49,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  你好
+  Java并发编程之美读书笔记
 </h1>
  
 
@@ -58,12 +58,12 @@
 
     
     <div class="article-meta">
-      <a href="/Index/" class="article-date">
-  <time datetime="2020-03-07T05:19:59.000Z" itemprop="datePublished">2020-03-07</time>
+      <a href="/concurrent/" class="article-date">
+  <time datetime="2020-04-22T12:35:29.000Z" itemprop="datePublished">2020-04-22</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%A6%96%E9%A1%B5/">首页</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
   </div>
 
       
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">12</span>
+            <span class="post-count">690</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -107,7 +107,27 @@
       
 
       
-      <h3 id="Hello-这里是翁彧贤的个人博客"><a href="#Hello-这里是翁彧贤的个人博客" class="headerlink" title="Hello,这里是翁彧贤的个人博客"></a>Hello,这里是翁彧贤的个人博客</h3>
+      <h2 id="并发编程线程基础"><a href="#并发编程线程基础" class="headerlink" title="并发编程线程基础"></a>并发编程线程基础</h2><h3 id="线程创建与运行"><a href="#线程创建与运行" class="headerlink" title="线程创建与运行"></a>线程创建与运行</h3><p>Java中有三种线程创建方式,分别为实现Runnable接口的run 方法继承Thread类并重写run的方法,使用FutureTask方式.</p>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"I am a child thread"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunableTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I am a child thread"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallerTask</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建异步任务</span></span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;String&gt;(<span class="keyword">new</span> CallerTask());</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动线程应当使用Thread.start(),直接调用run方法并不会开启一个新的线程.</li>
+<li>futureTask.get()可以获取线程返回值.</li>
+</ul>
+<p>&emsp;&emsp;小结:使用继承方式的好处是方便传参,你可以在子类里面添加成员变量,通过set方法设置参数或者通过构造函数进行传递,而如果使用Runnable方式,则只能使用主线程里面被声明为final的变量.不好的地方是Java不支持多继承,如果继承了 Thread 类,那么子类不能再继承其他类,而 Runable 则没有这个限制.前两种方式都没办法拿到任务的返回结果,但是Futuretask方式可以.</p>
+<h3 id="线程通知与等待"><a href="#线程通知与等待" class="headerlink" title="线程通知与等待"></a>线程通知与等待</h3><h4 id="wait-函数"><a href="#wait-函数" class="headerlink" title="wait()函数"></a>wait()函数</h4><p>&emsp;&emsp;当一个线程调用一个共享变量的wait()方法时,该调用线程会被阻塞挂起,直到发生下面几件事情之一才返回：(1）其他线程调用了该共享对象的notify()或者notifyAll()方法；(2）其他线程调用了该线程的interrupt()方法,该线程抛出InterruptedException异常返回.<br>&emsp;&emsp;另外需要注意的是,如果调用wait()方法的线程没有事先获取该对象的监视器锁,则调用wait()方法时调用线程会抛出IllegalMonitorStateException异常.</p>
+<p>获取监视器锁的两种方法:</p>
+<ol>
+<li>执行synchronized同步代码块时,使用该共享变量作为参数</li>
+<li>调用该共享变量的方法,并且该方法使用了synchronized修饰</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">synchronized</span> (共享变量) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;假如某一线程通过synchronized获取到某一共享变量的锁,那么后续所有企图访问该元素的线程将会在获取该监视器锁的地方被挂起.</p>
+<p>&emsp;&emsp;调用共享变量的wait()方法会释放获取到的锁,否则会引起死锁.另外需要注意的是,当前线程调用共享变量的 wait()方法后只会释放当前共享变量上的锁,如果当前线程还持有其他共享变量的锁,则这些锁是不会被释放的.</p>
+
       
       <!-- reward -->
       
@@ -175,14 +195,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/Index/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/concurrent/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A6%96%E9%A1%B5/" rel="tag">首页</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li></ul>
 
 
     </footer>
@@ -193,15 +213,11 @@
   
   <nav class="article-nav">
     
-      <a href="/lex-study/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            lex学习研究报告
-          
-        </div>
-      </a>
     
+      <a href="/lexical-analyze-pro/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">从正规式到词法分析</div>
+      </a>
     
   </nav>
 
