@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java并发编程之美读书笔记 |  Weng
+    第1章：并发编程线程基础 |  Weng
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -41,7 +41,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-concurrent" class="article article-type-post" itemscope
+  <article id="post-concurrent/01并发编程线程基础" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -49,7 +49,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java并发编程之美读书笔记
+  第1章：并发编程线程基础
 </h1>
  
 
@@ -58,8 +58,8 @@
 
     
     <div class="article-meta">
-      <a href="/concurrent/" class="article-date">
-  <time datetime="2020-04-22T12:35:29.000Z" itemprop="datePublished">2020-04-22</time>
+      <a href="/concurrent/01%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2020-04-24T03:52:00.000Z" itemprop="datePublished">2020-04-24</time>
 </a>
       
   <div class="article-category">
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.2k</span>
+            <span class="post-count">954</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -107,49 +107,56 @@
       
 
       
-      <h2 id="并发编程线程基础"><a href="#并发编程线程基础" class="headerlink" title="并发编程线程基础"></a>并发编程线程基础</h2><h3 id="线程创建与运行"><a href="#线程创建与运行" class="headerlink" title="线程创建与运行"></a>线程创建与运行</h3><p>Java中有三种线程创建方式,分别为实现Runnable接口的run 方法继承Thread类并重写run的方法,使用FutureTask方式.</p>
-<a id="more"></a>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"I am a child thread"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunableTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I am a child thread"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallerTask</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建异步任务</span></span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;String&gt;(<span class="keyword">new</span> CallerTask());</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动线程应当使用Thread.start(),直接调用run方法并不会开启一个新的线程.</li>
-<li>futureTask.get()可以获取线程返回值.</li>
+      <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#wait">wait()</a></li>
+<li><a href="#notify和notifyall">notify()和notifyAll()</a></li>
+<li><a href="#join">join()</a></li>
+<li><a href="#sleep">sleep()</a></li>
+<li><a href="#yield">yield()</a></li>
+<li><a href="#线程中断">线程中断</a><ul>
+<li><a href="#void-interrupt">void interrupt()</a></li>
+<li><a href="#boolean-isinterrupted">boolean isInterrupted()</a></li>
+<li><a href="#boolean-interrupted">boolean interrupted()</a></li>
+<li><a href="#示例">示例</a></li>
 </ul>
-<p>&emsp;&emsp;小结:使用继承方式的好处是方便传参,你可以在子类里面添加成员变量,通过set方法设置参数或者通过构造函数进行传递,而如果使用Runnable方式,则只能使用主线程里面被声明为final的变量.不好的地方是Java不支持多继承,如果继承了 Thread 类,那么子类不能再继承其他类,而 Runable 则没有这个限制.前两种方式都没办法拿到任务的返回结果,但是Futuretask方式可以.</p>
-<h3 id="线程通知与等待"><a href="#线程通知与等待" class="headerlink" title="线程通知与等待"></a>线程通知与等待</h3><h4 id="wait-函数"><a href="#wait-函数" class="headerlink" title="wait()函数"></a>wait()函数</h4><p>&emsp;&emsp;当一个线程调用一个共享变量的wait()方法时,该调用线程会被阻塞挂起,直到发生下面几件事情之一才返回：(1）其他线程调用了该共享对象的notify()或者notifyAll()方法；(2）其他线程调用了该线程的interrupt()方法,该线程抛出InterruptedException异常返回.<br>&emsp;&emsp;另外需要注意的是,如果调用wait()方法的线程没有事先获取该对象的监视器锁,则调用wait()方法时调用线程会抛出IllegalMonitorStateException异常.</p>
-<p>获取监视器锁的两种方法:</p>
-<ol>
-<li>执行synchronized同步代码块时,使用该共享变量作为参数</li>
-<li>调用该共享变量的方法,并且该方法使用了synchronized修饰</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">synchronized</span> (共享变量) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;假如某一线程通过synchronized获取到某一共享变量的锁,那么后续所有企图访问该元素的线程将会在获取该监视器锁的地方被挂起.</p>
-<p>&emsp;&emsp;调用共享变量的wait()方法会释放获取到的锁,否则会引起死锁.另外需要注意的是,当前线程调用共享变量的 wait()方法后只会释放当前共享变量上的锁,如果当前线程还持有其他共享变量的锁,则这些锁是不会被释放的.</p>
-<p>当一个线程调用共享对象的wait()方法被阻塞挂起后,如果其他线程中断了该线程,则该线程会抛出InterruptedException异常并返回.</p>
-<h4 id="wait-long-timeout-函数"><a href="#wait-long-timeout-函数" class="headerlink" title="wait(long timeout)函数"></a>wait(long timeout)函数</h4><p>如果一个线程调用共享对象的该方法挂起后,没有在指定的timeout ms内被其他线程调用该共享变量的notify()或notifyAll()方法唤醒,那么该函数还是会因超时而返回.</p>
-<h4 id="notify-函数"><a href="#notify-函数" class="headerlink" title="notify()函数"></a>notify()函数</h4><p>&emsp;&emsp;一个线程调用共享对象的notify()方法后,会唤醒一个在该共享变量的上调用wait系列方法后被挂起的线程.一个共享变量上可能会有多个线程在等待具体唤醒哪个等待的线程是随机的.</p>
-<p>&emsp;&emsp;此外被唤醒的线程不能马上从wait方法返回并继续执行它必须在获取了共享对象的监视器锁后才可以返回也就是唤醒它的线程释放了共享变量上的监视器锁后被唤醒的线程也不一定会获取到共享对象的监视器锁这是因为该线程还需要和其他线程一起竞争该~Yi只有该线程竞争到了共享变量的监视器锁后才可以继续执行．</p>
-<p>&emsp;&emsp;类似wait系列方法只有当前线程获取到了共享变量的监视器锁后才可以调用共享变量的notify()方法否则会抛出Illega!MonitorStateException异常．</p>
-<h4 id="notifyAll-函数"><a href="#notifyAll-函数" class="headerlink" title="notifyAll()函数"></a>notifyAll()函数</h4><p>&emsp;&emsp;不同于在共享变量上调用notify()函数会唤醒被阻塞到该共享变量上的一个线程,notifyAll()方法则会唤醒所有在该共享变量上由于调用wait系列方法而被挂起的线程</p>
-<h3 id="等待线程执行终止的join方法"><a href="#等待线程执行终止的join方法" class="headerlink" title="等待线程执行终止的join方法"></a>等待线程执行终止的join方法</h3><p>&emsp;&emsp;线程A调用线程B的join()方法后会被阻塞,直至线程B执行完毕并返回.当线程A被阻塞时,其他线程调用A的interrupt()方法中断了A线程时,线程A会抛出InterruptException异常.</p>
-<h3 id="让线程休眠的sleep方法"><a href="#让线程休眠的sleep方法" class="headerlink" title="让线程休眠的sleep方法"></a>让线程休眠的sleep方法</h3><p>&emsp;&emsp;Thread类中有一个静态的sleep方法,当一个执行中的线程调用了Thread的sleep方法后,调用线程会暂时让出指定时间的执行权,也就是在这期间不参与CPU的调度,但是该线程所拥有的监视器资源,比如锁还是持有不让出的.指定的睡眠时间到了后该函数会正常返回,线程就处于就绪状态,然后参与CPU的调度,获取到CPU资源后就可以继续运行了.如果在睡眠期间其他线程调用了该线程的inten-upt()方法中断了该线程,则该线程会在调用sleep方法的地方抛出IntermptedException异常而返回.</p>
-<p>&emsp;&emsp;当线程A在睡眠期间,另外一个线程调用线程A的interrupt()方法中断线程会抛出异常.</p>
-<h3 id="让出CPU执行权的yield方法"><a href="#让出CPU执行权的yield方法" class="headerlink" title="让出CPU执行权的yield方法"></a>让出CPU执行权的yield方法</h3><p>&emsp;&emsp;Thread类中有一个静态的yield方法,当一个线程调用yield方法时,实际就是在暗示线程调度器当前线程请求让出自己的CPU使用,但是线程调度器可以无条件忽略这个暗示.我们知道操作系统是为每个线程分配一个时间片来占有 CPU的,正常情况下当一个线程把分配给自己的时间片使用完后,线程调度器才会进行下一轮的线程调度,而当一个线程调用了Thread类的静态方法yield时,是在告诉线程调度器自己占有的时间片中还没有使用完的部分自己不想使用了,这暗示线程调度器现在就可以进行下一轮的线程调度.</p>
-<p>&emsp;&emsp;当一个线程调用 yield 方法时,当前线程会让出CPU使用权,然后处于就绪状态,线程调度器会从线程就绪队列里面获取一个线程优先级最高的线程,当然也有可能会调度到刚刚让出CPU的那个线程来获取CPU执行权.</p>
-<p>&emsp;&emsp;总结:sleep与yield方法的区别在于,当线程调用sleep方法时调用线程会被阻塞挂起指定的时间,在这期间线程调度器不会去调度该线程.而调用yield方法时,线程只是让出自己剩余的时间片,并没有被阻塞挂起,而是处于就绪状态,线程调度器下一次调度时就有可能调度到当前线程执行.</p>
-<h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><p>Java中的线程中断是一种线程间的协作模式,通过设置线程的中断标志并不能直接终止该线程的执行,而是被中断的线程根据中断状态自行处理.</p>
+</li>
+<li><a href="#守护进程与用户进程">守护进程与用户进程</a><ul>
+<li><a href="#示例-1">示例</a></li>
+</ul>
+</li>
+<li><a href="#更多">更多</a></li>
+</ul>
+<h2 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h2><p>如果调用wait()方法的线程没有实现获取该对象的监视器锁，则调用wait()方法时线程会抛出IllegalMonitorStateException异常。</p>
+<p>一个线程获取一个共享变量的监视器锁的方法</p>
 <ul>
-<li><p>void Iterrupt()方法:中断线程,例如,当线程A运行时,线程B可以调用线程A的interrupt()方法来设置线程A的中断标志为true并立即返回.设置标志仅仅是设置标志,线程A实际并没有被中断,它会继续往下执行.如果线程A因为调用了wait系列函数、join方法或者sleep方法而被阻塞挂起,这时候若线程B调用线程A的interrupt()方法,线程A会在调用这些方法的地方抛出InterruptedException异常而返回.</p>
-</li>
-<li><p>boolean isInterrupted()方法：检测当前线程是否被中断,如果是返回true,否则返回false.</p>
-</li>
-<li><p>boolean interrupted()方法：检测当前线程是否被中断,如果是返回true,否则返回false.与islnterrupted不同的是,该方法如果发现当前线程被中断,则会清除中断标志,并且该方法是static方法,可以通过Thread类直接调用.另外从下面的代码可以知道,在interrupted()内部是获取当前调用线程的中断标志而不是调用interrupted()方法的实例对象的中断标志.</p>
+<li>执行synchronized同步代码块时，使用该共享变量作为参数：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(共享变量) &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用该共享变量的方法，并且该方法使用了synchronized修饰：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">interrupted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//清除中断标志</span></span><br><span class="line">    <span class="keyword">return</span> currentThread().isinterrupted(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<blockquote>
+<p>注意：一个线程可以挂起状态变成运行状态（也就是被唤醒），即使该线程没有被其他线程调用notify()、notifyAll()方法进行通知，或者被中断，或者等待超时，这就是所谓的<strong>虚假唤醒</strong>。</p>
+</blockquote>
+<p>虚假唤醒在实践中很少发生，但要防患于未然，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(obj) &#123;</span><br><span class="line">    <span class="keyword">while</span>(条件不满足) &#123;</span><br><span class="line">        obj.wait();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="notify-和notifyAll"><a href="#notify-和notifyAll" class="headerlink" title="notify()和notifyAll()"></a>notify()和notifyAll()</h2><p>notify()会唤醒被阻塞到该共享变量上的一个线程，notifyAll()会唤醒所有在该共享变量上由于调用wait系列方法而被挂起的线程。</p>
+<h2 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    thread1.join();</span><br><span class="line">    thread2.join();</span><br><span class="line">    System.out.println(<span class="string">"all child thread over!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主线程首先会在调用thread1.join()后被阻塞，等待thread1执行完毕后，thread2开始阻塞，以此类推，最终会等所有子线程都结束后main函数才会返回。</p>
+<h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep()"></a>sleep()</h2><p>sleep()会使线程暂时让出指定时间的执行权，也就是在这期间不参与CPU的调度，但不会释放锁。</p>
+<h2 id="yield"><a href="#yield" class="headerlink" title="yield()"></a>yield()</h2><p>线程调用yield()方法时，实际上是暗示线程调度器当前线程请求让出自己的CPU使用（告诉线程调度器可以进行下一轮的线程调度），但线程调度器可以无条件忽略这个暗示。</p>
+<h2 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h2><h3 id="void-interrupt"><a href="#void-interrupt" class="headerlink" title="void interrupt()"></a>void interrupt()</h3><p>设置线程的中断标志为true并立即返回，但线程实际上并没有被中断而会继续向下执行；如果线程因为调用了wait系列函数、join方法或者sleep方法而被阻塞挂起，其他线程调用该线程的interrupt()方法会使该线程抛出InterruptedException异常而返回。</p>
+<h3 id="boolean-isInterrupted"><a href="#boolean-isInterrupted" class="headerlink" title="boolean isInterrupted()"></a>boolean isInterrupted()</h3><p>检测当前线程是否被中断，是则返回true，否则返回false。</p>
+<h3 id="boolean-interrupted"><a href="#boolean-interrupted" class="headerlink" title="boolean interrupted()"></a>boolean interrupted()</h3><p>检测当前线程是否被中断，返回值同上，但如果发现当前线程被中断，会清除中断标志；该方法是<strong>static</strong>方法，内部是获取当前调用线程的中断标志而不是调用interrupted()方法的实例对象的中断标志。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    Thread threadOne = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">        </span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">              <span class="keyword">for</span>(;;) &#123;</span><br><span class="line"></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//启动线程</span></span><br><span class="line">      threadOne.start();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//设置中断标志</span></span><br><span class="line">      threadOne.interrupt();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//获取中断标志</span></span><br><span class="line">      System.out.println(<span class="string">"isInterrupted:"</span> + threadOne.isInterrupted() );</span><br><span class="line"></span><br><span class="line">      <span class="comment">//获取中断标志并重置</span></span><br><span class="line">      System.out.println(<span class="string">"isInterrupted:"</span> + threadOne.interrupted() );</span><br><span class="line"></span><br><span class="line">      <span class="comment">//获取中断标志并重置</span></span><br><span class="line">      System.out.println(<span class="string">"isInterrupted:"</span> + Thread.interrupted() );</span><br><span class="line"></span><br><span class="line">      <span class="comment">//获取中断标志</span></span><br><span class="line">      System.out.println(<span class="string">"isInterrupted:"</span> + threadOne.isInterrupted() );</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">          threadOne.join();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(InterruptedException e) &#123;</span><br><span class="line">          System.out.println(<span class="string">"interrupted!!!"</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      System.out.println(<span class="string">"main thread is over"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">isInterrupted:<span class="keyword">true</span></span><br><span class="line">isInterrupted:<span class="keyword">false</span></span><br><span class="line">isInterrupted:<span class="keyword">false</span></span><br><span class="line">isInterrupted:<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>解析<br>threadOne.interrupted()一句，由于interrupted()为static方法，相当于执行Thread.interrupted()。</p>
+<h2 id="守护进程与用户进程"><a href="#守护进程与用户进程" class="headerlink" title="守护进程与用户进程"></a>守护进程与用户进程</h2><p>当最后一个用户进程结束时，JVM会正常退出，而不管当前是否有守护进程。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(;;) &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// t.setDaemon(true);</span></span><br><span class="line">    t.start();</span><br><span class="line">    System.out.println(<span class="string">"main is over"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行后发现虽然输出了”main is over”，但ide运行状态红框仍亮着，说明JVM进程未结束，如图：</p>
+<p><img src="/images/01.png" alt="image01"></p>
+<p>打开注释后程序则快速退出。</p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2>
       
       <!-- reward -->
       
@@ -217,7 +224,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/concurrent/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/concurrent/01%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -235,19 +242,19 @@
   
   <nav class="article-nav">
     
-      <a href="/concurrent/01%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="article-nav-link">
+      <a href="/concurrent/02%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E5%85%B6%E4%BB%96%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            第1章：并发编程线程基础
+            第2章 并发编程的其他基础知识
           
         </div>
       </a>
     
     
-      <a href="/lexical-analyze-pro/" class="article-nav-link">
+      <a href="/concurrent/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">从正规式到词法分析</div>
+        <div class="article-nav-title">Java并发编程之美读书笔记</div>
       </a>
     
   </nav>
