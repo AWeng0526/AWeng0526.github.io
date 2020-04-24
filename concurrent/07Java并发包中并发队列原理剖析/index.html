@@ -107,34 +107,9 @@
       
 
       
-      <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#priorityblockingqueue">PriorityBlockingQueue</a><ul>
-<li><a href="#类图结构">类图结构</a></li>
-<li><a href="#原理讲解">原理讲解</a><ul>
-<li><a href="#boolean-offer">boolean offer()</a></li>
-<li><a href="#e-poll">E poll()</a></li>
-<li><a href="#void-pute-e">void put(E e)</a></li>
-<li><a href="#e-take">E take()</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#delayqueue">DelayQueue</a><ul>
-<li><a href="#类图结构-1">类图结构</a></li>
-<li><a href="#原理讲解-1">原理讲解</a><ul>
-<li><a href="#boolean-offere-e">boolean offer(E e)</a></li>
-<li><a href="#e-take-1">E take()</a></li>
-<li><a href="#e-poll-1">E poll()</a></li>
-<li><a href="#int-size">int size()</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#更多">更多</a></li>
-</ul>
-<p>LinkedBlockingQueue和ArrayBlockingQueue比较简单，不进行讲解了。下面只介绍PriorityBlockingQueue和DelayQueue。</p>
+      <p>LinkedBlockingQueue和ArrayBlockingQueue比较简单，不进行讲解了。下面只介绍PriorityBlockingQueue和DelayQueue。</p>
 <h2 id="PriorityBlockingQueue"><a href="#PriorityBlockingQueue" class="headerlink" title="PriorityBlockingQueue"></a>PriorityBlockingQueue</h2><p>PriorityBlockingQueue是带优先级的无界阻塞队列，每次出队都返回优先级最高或最低的元素。内部使用二叉堆实现。</p>
-<h3 id="类图结构"><a href="#类图结构" class="headerlink" title="类图结构"></a>类图结构</h3><p><img src="images/10.png" alt=""></p>
+<h3 id="类图结构"><a href="#类图结构" class="headerlink" title="类图结构"></a>类图结构</h3><p><img src="/images/concurrent/10.png" alt=""></p>
 <p>PriorityBlockingQueue内部有一个数组queue，用来存放队列元素。allocationSpinLock是个自旋锁，通过CAS操作来保证同时只有一个线程可以扩容队列，状态为0或1。</p>
 <p>由于这是一个优先队列，所以有一个comparator用来比较元素大小。</p>
 <p>下面为构造函数：</p>
@@ -165,7 +140,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">    <span class="comment">// 阻塞可被中断</span></span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    E result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 队列为空就将当前线程放入notEmpty条件队列</span></span><br><span class="line">        <span class="comment">// 使用while循环判断是为了避免虚假唤醒</span></span><br><span class="line">        <span class="keyword">while</span> ( (result = dequeue()) == <span class="keyword">null</span>)</span><br><span class="line">            notEmpty.await();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="DelayQueue"><a href="#DelayQueue" class="headerlink" title="DelayQueue"></a>DelayQueue</h2><p>DelayQueue并发队列是一个无界阻塞延迟队列，队列中的每一个元素都有一个过期时间，当从队列中获取元素时只有过期元素才会出列。队列头元素是最快要过期的元素。</p>
-<h3 id="类图结构-1"><a href="#类图结构-1" class="headerlink" title="类图结构"></a>类图结构</h3><p><img src="images/11.png" alt=""></p>
+<h3 id="类图结构-1"><a href="#类图结构-1" class="headerlink" title="类图结构"></a>类图结构</h3><p><img src="/images/concurrent/11.png" alt=""></p>
 <p>DelayQueue内部使用PriorityQueue存放数据，使用ReentrantLock实现线程同步。<br>队列里的元素要实现Delayed接口（Delayed接口继承了Comparable接口），用以得到过期时间并进行过期时间的比较。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Delayed</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Delayed</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">getDelay</span><span class="params">(TimeUnit unit)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

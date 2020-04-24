@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -107,42 +107,7 @@
       
 
       
-      <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#并行与并发区别">并行与并发区别</a></li>
-<li><a href="#java中的线程安全问题">Java中的线程安全问题</a></li>
-<li><a href="#java中共享变量的内存可见性问题">Java中共享变量的内存可见性问题</a></li>
-<li><a href="#synchronized关键字">synchronized关键字</a><ul>
-<li><a href="#示例">示例</a></li>
-</ul>
-</li>
-<li><a href="#volatile关键字">volatile关键字</a><ul>
-<li><a href="#示例-1">示例</a></li>
-<li><a href="#volatile不保证原子性示例">volatile不保证原子性示例</a></li>
-<li><a href="#使用场景">使用场景</a></li>
-</ul>
-</li>
-<li><a href="#java中的cas操作">Java中的CAS操作</a><ul>
-<li><a href="#示例-2">示例</a></li>
-<li><a href="#aba问题">ABA问题</a><ul>
-<li><a href="#问题描述">问题描述</a></li>
-<li><a href="#解决方案">解决方案</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#unsafe类">Unsafe类</a></li>
-<li><a href="#java指令重排序">Java指令重排序</a></li>
-<li><a href="#锁">锁</a><ul>
-<li><a href="#乐观锁与悲观锁">乐观锁与悲观锁</a></li>
-<li><a href="#公平锁与非公平锁">公平锁与非公平锁</a></li>
-<li><a href="#独占锁与共享锁">独占锁与共享锁</a></li>
-<li><a href="#可重入锁">可重入锁</a></li>
-<li><a href="#自旋锁">自旋锁</a></li>
-</ul>
-</li>
-<li><a href="#更多">更多</a></li>
-</ul>
-<h2 id="并行与并发区别"><a href="#并行与并发区别" class="headerlink" title="并行与并发区别"></a>并行与并发区别</h2><p>并发指同一<strong>时间段</strong>多个任务同时都在进行，并且都没有执行结束，而并行是说在<strong>单位时间</strong>内多个任务在同时运行。</p>
+      <h2 id="并行与并发区别"><a href="#并行与并发区别" class="headerlink" title="并行与并发区别"></a>并行与并发区别</h2><p>并发指同一<strong>时间段</strong>多个任务同时都在进行，并且都没有执行结束，而并行是说在<strong>单位时间</strong>内多个任务在同时运行。</p>
 <p>并发任务强调在一个时间段内同时进行，而一个时间段有多个单位i时间构成，所以说并发的多个任务在单位时间内不一定同时在执行。</p>
 <p>一个CPU同时只能执行一个任务，所以单CPU时代多个任务都是并发执行的。</p>
 <blockquote>
@@ -175,7 +140,7 @@
 </tr>
 </tbody></table>
 <p>假设count初始值为0，线程A在t1和t2时间读取了主内存中的count并在本地将其递增为1，t2时线程B从主内存中读取了count的值0并于t3时将其递增为1，t3时线程A将count的新值1更新到主内存，t4时线程B进行了同样的操作，最终主内存中count的值为1而非我们想要的2。</p>
-<h2 id="Java中共享变量的内存可见性问题"><a href="#Java中共享变量的内存可见性问题" class="headerlink" title="Java中共享变量的内存可见性问题"></a>Java中共享变量的内存可见性问题</h2><p><img src="/images/02.png" alt=""></p>
+<h2 id="Java中共享变量的内存可见性问题"><a href="#Java中共享变量的内存可见性问题" class="headerlink" title="Java中共享变量的内存可见性问题"></a>Java中共享变量的内存可见性问题</h2><p><img src="/images/concurrent/02.png" alt=""></p>
 <p>如图是一个双核CPU模型，每个核都有自己的一级缓存，有些架构里还有一个所有CPU共享的二级缓存。</p>
 <p>现假设线程A和线程B同时处理一个共享变量，由于Cache的存在，将会出现<strong>内存不可见</strong>问题，原因如下：</p>
 <ul>

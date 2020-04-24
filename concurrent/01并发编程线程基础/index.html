@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">954</span>
+            <span class="post-count">920</span>
         </span>
     </span>
 
@@ -107,26 +107,7 @@
       
 
       
-      <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#wait">wait()</a></li>
-<li><a href="#notify和notifyall">notify()和notifyAll()</a></li>
-<li><a href="#join">join()</a></li>
-<li><a href="#sleep">sleep()</a></li>
-<li><a href="#yield">yield()</a></li>
-<li><a href="#线程中断">线程中断</a><ul>
-<li><a href="#void-interrupt">void interrupt()</a></li>
-<li><a href="#boolean-isinterrupted">boolean isInterrupted()</a></li>
-<li><a href="#boolean-interrupted">boolean interrupted()</a></li>
-<li><a href="#示例">示例</a></li>
-</ul>
-</li>
-<li><a href="#守护进程与用户进程">守护进程与用户进程</a><ul>
-<li><a href="#示例-1">示例</a></li>
-</ul>
-</li>
-<li><a href="#更多">更多</a></li>
-</ul>
-<h2 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h2><p>如果调用wait()方法的线程没有实现获取该对象的监视器锁，则调用wait()方法时线程会抛出IllegalMonitorStateException异常。</p>
+      <h2 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h2><p>如果调用wait()方法的线程没有实现获取该对象的监视器锁，则调用wait()方法时线程会抛出IllegalMonitorStateException异常。</p>
 <p>一个线程获取一个共享变量的监视器锁的方法</p>
 <ul>
 <li>执行synchronized同步代码块时，使用该共享变量作为参数：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(共享变量) &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -154,7 +135,7 @@
 <h2 id="守护进程与用户进程"><a href="#守护进程与用户进程" class="headerlink" title="守护进程与用户进程"></a>守护进程与用户进程</h2><p>当最后一个用户进程结束时，JVM会正常退出，而不管当前是否有守护进程。</p>
 <h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(;;) &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// t.setDaemon(true);</span></span><br><span class="line">    t.start();</span><br><span class="line">    System.out.println(<span class="string">"main is over"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行后发现虽然输出了”main is over”，但ide运行状态红框仍亮着，说明JVM进程未结束，如图：</p>
-<p><img src="/images/01.png" alt="image01"></p>
+<p><img src="/images/concurrent/01.png" alt=""></p>
 <p>打开注释后程序则快速退出。</p>
 <h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2>
       

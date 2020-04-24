@@ -107,18 +107,8 @@
       
 
       
-      <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#类图结构">类图结构</a></li>
-<li><a href="#源码分析">源码分析</a><ul>
-<li><a href="#schedulerunnable-command-long-delay-timeunit-unit">schedule(Runnable command, long delay, TimeUnit unit)</a></li>
-<li>[scheduleWithFixedDelay(Runnable command,　long initialDelay,　long delay,　TimeUnit unit)](#schedulewithfixeddelayrunnable-command　long-initialdelay　long-delay　timeunit-unit)</li>
-<li><a href="#scheduleatfixedraterunnable-command-long-initialdelay-long-period-timeunit-unit">scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)</a></li>
-</ul>
-</li>
-<li><a href="#更多">更多</a></li>
-</ul>
-<h2 id="类图结构"><a href="#类图结构" class="headerlink" title="类图结构"></a>类图结构</h2><p>ScheduledThreadPoolExecutor时一个可以在指定一定延迟时间后或者定时进行任务调度执行的线程池。</p>
-<p><img src="images/13.png" alt=""></p>
+      <h2 id="类图结构"><a href="#类图结构" class="headerlink" title="类图结构"></a>类图结构</h2><p>ScheduledThreadPoolExecutor时一个可以在指定一定延迟时间后或者定时进行任务调度执行的线程池。</p>
+<p><img src="/images/concurrent/13.png" alt=""></p>
 <p>ScheduledThreadPoolExecutor继承了ThreadPoolExecutor并实现了ScheduledExecutorService接口。</p>
 <p>线程池队列是DelayedWorkQueue，与DelayedQueue一样属于延迟队列。</p>
 <p>ScheduledFuturetask是具有返回值的任务，继承自FutureTask。FutureTask内部用一个变量state来表示任务的状态，一开始为NEW。</p>
