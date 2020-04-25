@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    第6章 Java并发包中锁原理剖析 |  Weng
+    第六章 Java并发包中锁原理剖析 |  Weng
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -49,7 +49,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  第6章 Java并发包中锁原理剖析
+  第六章 Java并发包中锁原理剖析
 </h1>
  
 
@@ -110,6 +110,8 @@
       <h2 id="LockSupport工具类"><a href="#LockSupport工具类" class="headerlink" title="LockSupport工具类"></a>LockSupport工具类</h2><p>LockSupport是创建锁和其他同步类的基础。</p>
 <p>LockSupport类与每个使用它的线程都会关联一个许可证，默认情况下调用LockSupport类的方法的线程是不持有许可证的。</p>
 <p>下面介绍LockSupport类中的几个主要函数。</p>
+<a id="more"></a>
+
 <h3 id="1-void-park"><a href="#1-void-park" class="headerlink" title="1. void park()"></a>1. void park()</h3><p>如果park方法拿到了与LockSupport关联的许可证，则调用LockSupport.park()时会马上返回，否则调用线程会被禁止参与线程的调度，也就是会被阻塞挂起。</p>
 <p>如下代码直接在main函数里面调用park方法，最终只会输出 “begin park！”，然后当前线程被挂起，这时因为在默认情况下调用线程是不持有许可证的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"begin park!"</span>);</span><br><span class="line">    LockSupport.park();</span><br><span class="line">    System.out.println(<span class="string">"end park!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -369,7 +371,7 @@ end park!</code></pre><p>下面再来看一个例子来加深对park和unpark的
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            第7章 Java并发包中并发队列原理剖析
+            第七章 Java并发包中并发队列原理剖析
           
         </div>
       </a>
@@ -377,7 +379,7 @@ end park!</code></pre><p>下面再来看一个例子来加深对park和unpark的
     
       <a href="/concurrent/05Java%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E5%B9%B6%E5%8F%91List%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">第5章 Java并发包中并发List源码剖析</div>
+        <div class="article-nav-title">第五章 Java并发包中并发List源码剖析</div>
       </a>
     
   </nav>

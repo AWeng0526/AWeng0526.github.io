@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    第5章 Java并发包中并发List源码剖析 |  Weng
+    第五章 Java并发包中并发List源码剖析 |  Weng
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -49,7 +49,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  第5章 Java并发包中并发List源码剖析
+  第五章 Java并发包中并发List源码剖析
 </h1>
  
 
@@ -108,6 +108,8 @@
 
       
       <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>JUC包中的并发List只有CopyOnWriteArrayList。CopyOnWriteArrayList是一个线程安全的ArrayList，使用了写时复制策略，对其进行的修改操作都是在底层的一个复制的数组上进行的。</p>
+<a id="more"></a>
+
 <h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>CopyOnWriteArrayList内部包含一个array：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** The array, accessed only via getArray/setArray. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Object[] array;</span><br></pre></td></tr></table></figure>
 
@@ -236,7 +238,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            第6章 Java并发包中锁原理剖析
+            第六章 Java并发包中锁原理剖析
           
         </div>
       </a>
@@ -244,7 +246,7 @@
     
       <a href="/concurrent/04Java%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">第4章 Java并发包中原子操作类原理剖析</div>
+        <div class="article-nav-title">第四章 Java并发包中原子操作类原理剖析</div>
       </a>
     
   </nav>
