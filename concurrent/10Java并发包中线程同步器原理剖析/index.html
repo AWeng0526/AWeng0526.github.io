@@ -199,7 +199,9 @@ Thread[pool-1-thread-1,5,main] step3</code></pre><h3 id="类图结构-1"><a href
 <h4 id="void-release-int-permits"><a href="#void-release-int-permits" class="headerlink" title="void release(int permits)"></a>void release(int permits)</h4><p>可增加多个信号量。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (permits &lt; <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    sync.releaseShared(permits);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2>
+
+
+
       
       <!-- reward -->
       
