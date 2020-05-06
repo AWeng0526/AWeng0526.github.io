@@ -250,7 +250,7 @@
 <p>&emsp; &emsp;还需注意的是,多个MinDFA合并后得到的并非是MinDFA,严格来讲,可能合并结果连DFA都不是.举个例子,有如下两个DFA:</p>
 <p><a href="https://imgchr.com/i/GLbyff" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/04/12/GLbyff.png" alt="GLbyff.png"></a></p>
 <p>合并后会得到:<br><img src="https://s1.ax1x.com/2020/04/12/GLbot0.png" alt="GLbot0.png"></p>
-<p>&emsp; &emsp;可以看出,结点0接受字符/时有两条状态转移,这不符合DFA的定义.在编码中,由于使用HashSet,第二个DFA会覆盖第一个DFA,也就是说最终得到的DFA不接受字符/.好在目前的正规式不会有这样的冲突.当然,从拓展性上来讲想要实现移位操作符(&gt;&gt;,&lt;&lt;)会变得十分困难,因为它和操作符&gt;,&lt;冲突了.</p>
+<p>&emsp; &emsp;可以看出,结点0接受字符/时有两条状态转移,这不符合DFA的定义.在编码中,由于使用HashMap,第二个DFA会覆盖第一个DFA,也就是说最终得到的DFA不接受字符/.好在目前的正规式不会有这样的冲突.当然,从拓展性上来讲想要实现移位操作符(&gt;&gt;,&lt;&lt;)会变得十分困难,因为它和操作符&gt;,&lt;冲突了.</p>
 <p>&emsp; &emsp;那是否有什么办法能够补救?似乎可以将合并结果转为NFA,然后再执行一次NFA-&gt;DFA-&gt;MinDFA.但很遗憾,这很难做到.对比MinDFA和DFA以及NFA的数据结构,我们发现MinDFA舍弃很多辅助信息.因为的确不需要这些信息,所以我们现在想通过MinDFA反推得到NFA会变成一件很麻烦的事.</p>
 <p>&emsp; &emsp;更好的解决办法是:在得到各个正规式的NFA时候对其进行合并.这也很符合我们的逻辑,C语言从词法上无非就是各个正规式并操作之后取闭包,即(ID|NUMBER|……)*.但这么做还要考虑下面两个问题:</p>
 <ol>
@@ -261,7 +261,7 @@
 </ol>
 <p>综上,考虑词法分析的实现度和编码的工作量,采取对MinDFA合并而非对NFA合并.</p>
 <h3 id="后续过程"><a href="#后续过程" class="headerlink" title="后续过程"></a>后续过程</h3><p>后续过程可参考我的另一篇博客:<a href="https://wengyuxian.work/lexical-analyze/" target="_blank" rel="noopener">后续过程</a><br>这里只做简单介绍</p>
-<h4 id="核心算法-3"><a href="#核心算法-3" class="headerlink" title="核心算法"></a>核心算法</h4><p><img src="https://s1.ax1x.com/2020/04/01/G8tC6O.png" alt="G8tC6O.png"></p>
+<h4 id="核心算法-3"><a href="#核心算法-3" class="headerlink" title="核心算法"></a>核心算法</h4><p><a href="https://imgchr.com/i/YA5crV" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/06/YA5crV.png" alt="YA5crV.png"></a></p>
 <h4 id="补充说明-3"><a href="#补充说明-3" class="headerlink" title="补充说明"></a>补充说明</h4><p>&emsp; &emsp;来看一个例子:123abc.显然,这既不符合ID的正规式也不符合NUMBER的正规式,但是程序会将其识别为两个Token:NUMBER 123与ID abc.原因在于:当程序扫描到字符a时,发现无状态转移且123已经位于终态NUMBER,故将其识别成两部分.</p>
 <p>&emsp; &emsp;这么做是否有必要?为什么我们不在无状态转移时直接报告错误呢?来看一个例子:if(true).理想情况下我们应该得到四个Token:if,(,true,).我们并不希望扫描到(时发现无法状态转移而直接认定这是一个错误的字符,而我们不能也不该强制要求各个单词之间必须以空格分隔,所以采取了这种折中的办法.</p>
 <p>&emsp; &emsp;另外一点好处是:可以满足最长匹配.例如&gt;和&gt;=都属于运算符,当程序中出现&gt;=时我们希望得到一个Token而非两个,上述算法能满足这个需求.换而言之,这种行为是贪婪的.</p>
