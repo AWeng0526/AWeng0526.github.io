@@ -279,21 +279,21 @@
 <p><a href="https://imgchr.com/i/Y9jFkF" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/04/Y9jFkF.png" alt="Y9jFkF.png"></a></p>
 <p>&emsp; &emsp;对于”123 abc”和”123abc”,IDEA给出了一样的错误信息,这说明语法分析器在后续过程中能识别出这个错误.</p>
 <h2 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h2><h3 id="汤普森算法-1"><a href="#汤普森算法-1" class="headerlink" title="汤普森算法"></a>汤普森算法</h3><p>&emsp; &emsp;设有n个正规式,每个正规式平均有k个字符分别用m1,m2…mk表示.字符间的操作考虑复杂度高的|操作.即正规式为m1|m2|m3…</p>
-<p>最终生成的NFA大概如下:(图中省略了部分信息,例如结点编号,例如状态转移标识符)</p>
-<p><img src="https://s1.ax1x.com/2020/04/13/GvWkKs.png" alt="GvWkKs.png"></p>
+<p>最终生成的NFA大概如下:(图中省略了部分信息)</p>
+<p><a href="https://imgchr.com/i/YAHgN8" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/06/YAHgN8.png" alt="YAHgN8.png"></a></p>
 <p>生成一条状态转移的时间复杂度为O(1),下面来分析过程:</p>
 <ol>
 <li><p>m1,m2状态转移数目为:1,1.m1|m2得到1+1+4=6条状态转移.</p>
 </li>
-<li><p>m1|m2,m3状态转移数目为:6,1.m1|m2得到6+1+4=10条状态转移.</p>
+<li><p>m1|m2,m3状态转移数目为:6,1.m1|m2|m3得到6+1+4=11条状态转移.</p>
 </li>
-<li><p>m1|m2|m3,m4状态转移数目为:10,1.m1|m2得到10+1+4=14条状态转移.</p>
+<li><p>m1|m2|m3,m4状态转移数目为:10,1.m1|m2|m3|m4得到11+1+4=16条状态转移.</p>
 </li>
 </ol>
 <p>不难看出,这是一个等差数列.所以该部分时间复杂度为O(k^2).</p>
 <p>综上,汤普森算法的时间复杂度为O(n*k^2).</p>
-<h3 id="NFA-gt-DFA"><a href="#NFA-gt-DFA" class="headerlink" title="NFA-&gt;DFA"></a>NFA-&gt;DFA</h3><p>&emsp; &emsp;设字母表有n个元素,NFA中有m个结点.由于使用Hash,状态转移的数目不影响查找状态转移的速率,时间复杂度为O(1).</p>
-<p>&emsp; &emsp;表达式中有大量的并操作会导致时间复杂度的急剧上升,如果查看log中文件,可以发现正规式ID的NFA结点数目为460,而DFA中每个结点的状态集数目为130-170,约为NFA结点的1/3.也就是说,可以假设每次求空闭包的时间复杂度可高达O(m).对每个结点,我们要求n次(遍历字母表):</p>
+<h3 id="NFA-gt-DFA"><a href="#NFA-gt-DFA" class="headerlink" title="NFA-&gt;DFA"></a>NFA-&gt;DFA</h3><p>&emsp; &emsp;设字母表有n个元素,NFA中有m个结点.由于使用Hash,状态转移的数目不影响状态转移的速率,时间复杂度为O(1).</p>
+<p>&emsp; &emsp;表达式中有大量的并操作会导致时间复杂度的急剧上升,如果查看log中文件,可以发现正规式ID的NFA结点数目为460,而DFA中每个结点的状态集数目为130-170,约为NFA结点的1/3.也就是说,可以假设每次求空闭包的时间复杂度高达O(m).对每个结点,我们要求n次(遍历字母表):</p>
 <p>&emsp; &emsp;空闭包(smove(m1,字母表中元素))</p>
 <p>&emsp; &emsp;生成一个结点后需要查找该结点是否存在,该部分时间复杂度为1+2+3+..k,k为DFA中节点数目,观察log中文件,我们不妨假设k=m/3.即时间复杂度为O(m^2).</p>
 <p>&emsp;&emsp;故最差时间复杂度为O(nm^2)+O(m^2),即O(nm^2)</p>
