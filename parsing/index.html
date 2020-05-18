@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">1.6k</span>
         </span>
     </span>
 
@@ -120,89 +120,6 @@
 <p>&emsp; &emsp;&emsp; &emsp;log&emsp; &emsp;存放输出日志的包</p>
 <p>&emsp; &emsp;util&emsp; &emsp;工具包,实现读/写文件的操作.</p>
 <p>&emsp; &emsp;Parsing.java&emsp; &emsp;主调函数</p>
-<h3 id="项目统计"><a href="#项目统计" class="headerlink" title="项目统计"></a>项目统计</h3><p>&emsp; &emsp;Date : 2020-05-17 21:09:22</p>
-<p>&emsp; &emsp;Directory f:\OneDrive\OneDrive - stu.hqu.edu.cn\Code\Java\Compiler\Parsing</p>
-<p>&emsp; &emsp;Total : 12 files,  1076 codes, 495 comments, 186 blanks, all 1757 lines</p>
-<h4 id="Languages"><a href="#Languages" class="headerlink" title="Languages"></a>Languages</h4><table>
-<thead>
-<tr>
-<th align="center">language</th>
-<th align="center">files</th>
-<th align="center">code</th>
-<th align="center">comment</th>
-<th align="center">blank</th>
-<th align="center">total</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Java</td>
-<td align="center">12</td>
-<td align="center">1,076</td>
-<td align="center">495</td>
-<td align="center">186</td>
-<td align="center">1,757</td>
-</tr>
-</tbody></table>
-<h4 id="Directories"><a href="#Directories" class="headerlink" title="Directories"></a>Directories</h4><table>
-<thead>
-<tr>
-<th align="center">path</th>
-<th align="center">files</th>
-<th align="center">code</th>
-<th align="center">comment</th>
-<th align="center">blank</th>
-<th align="center">total</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">.</td>
-<td align="center">12</td>
-<td align="center">1,076</td>
-<td align="center">495</td>
-<td align="center">186</td>
-<td align="center">1,757</td>
-</tr>
-<tr>
-<td align="center">src</td>
-<td align="center">12</td>
-<td align="center">1,076</td>
-<td align="center">495</td>
-<td align="center">186</td>
-<td align="center">1,757</td>
-</tr>
-<tr>
-<td align="center">src\algorithm</td>
-<td align="center">4</td>
-<td align="center">505</td>
-<td align="center">208</td>
-<td align="center">69</td>
-<td align="center">782</td>
-</tr>
-<tr>
-<td align="center">src\cfg</td>
-<td align="center">6</td>
-<td align="center">477</td>
-<td align="center">260</td>
-<td align="center">105</td>
-<td align="center">842</td>
-</tr>
-<tr>
-<td align="center">src\cfg\production</td>
-<td align="center">4</td>
-<td align="center">131</td>
-<td align="center">51</td>
-<td align="center">33</td>
-<td align="center">215</td>
-</tr>
-<tr>
-<td align="center">src\util</td>
-<td align="center">1</td>
-<td align="center">49</td>
-<td align="center">10</td>
-<td align="center">6</td>
-<td align="center">65</td>
-</tr>
-</tbody></table>
 <h2 id="调试过程和运行结果"><a href="#调试过程和运行结果" class="headerlink" title="调试过程和运行结果"></a>调试过程和运行结果</h2><p>&emsp; &emsp;调用src/Parsing.java中main函数即可.输出结果存放于src/log目录中.</p>
 <p>&emsp; &emsp;src/Parsing.java中指定了CFG,测试,输出文本的路径:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parsing</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 默认CFG路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseCfg = <span class="string">"src/data/cfg/"</span>;</span><br><span class="line">    <span class="comment">// 默认测试文件路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseTest = <span class="string">"src/data/test/"</span>;</span><br><span class="line">    <span class="comment">// 默认输出路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseOut = <span class="string">"src/log/"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -255,7 +172,7 @@
 <p>&emsp; &emsp;消除左递归及公共左因子过程中产生的新产生式左部会不断添加该后缀直至无重复名.</p>
 <h4 id="系统环境要求"><a href="#系统环境要求" class="headerlink" title="系统环境要求"></a>系统环境要求</h4><p>&emsp; &emsp;JDK8及以上(支持lambda).</p>
 <h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><h4 id="CFG构造"><a href="#CFG构造" class="headerlink" title="CFG构造"></a>CFG构造</h4><p>&emsp; &emsp;我们规定产生式结构描述如下:</p>
-<p><a href="https://imgchr.com/i/YRQyut" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/17/YRQyut.png" alt="YRQyut.png"></a></p>
+<p><a href="https://imgchr.com/i/YhsBc9" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/18/YhsBc9.png" alt="YhsBc9.png"></a></p>
 <h5 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h5><p><a href="https://imgchr.com/i/YRQ8j1" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/17/YRQ8j1.png" alt="YRQ8j1.png"></a></p>
 <p>&emsp; &emsp;可以看到,数据结构的层次比较深.而且为了降低时间复杂度,需要查找的集合都使用了Hash(后续算法也是).</p>
 <p>&emsp; &emsp;因此程序中大量的使用了lambda表达式,例如:</p>
