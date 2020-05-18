@@ -121,7 +121,7 @@
 <p>&emsp; &emsp;util&emsp; &emsp;工具包,实现读/写文件的操作.</p>
 <p>&emsp; &emsp;Parsing.java&emsp; &emsp;主调函数</p>
 <h2 id="调试过程和运行结果"><a href="#调试过程和运行结果" class="headerlink" title="调试过程和运行结果"></a>调试过程和运行结果</h2><p>&emsp; &emsp;调用src/Parsing.java中main函数即可.输出结果存放于src/log目录中.</p>
-<p>&emsp; &emsp;src/Parsing.java中指定了CFG,测试,输出文本的路径:</p>
+<p>&emsp; &emsp;src/Parsing.java中指定了CFG,测试,输出文本的文件夹路径:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parsing</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 默认CFG路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseCfg = <span class="string">"src/data/cfg/"</span>;</span><br><span class="line">    <span class="comment">// 默认测试文件路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseTest = <span class="string">"src/data/test/"</span>;</span><br><span class="line">    <span class="comment">// 默认输出路径</span></span><br><span class="line">    <span class="keyword">static</span> String baseOut = <span class="string">"src/log/"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp; &emsp;主调函数parse结构如下:</p>
