@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.6k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">7 min</span>
+            <span class="post-count">8 min</span>
         </span>
     </span>
 </div>
@@ -203,8 +203,25 @@
 
 <p>&emsp; &emsp;消除公共左因子后的文法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">S     -&gt; A</span><br><span class="line"></span><br><span class="line">A     -&gt; a A&#96;</span><br><span class="line"></span><br><span class="line">A&#96;    -&gt; b</span><br><span class="line">A&#96;    -&gt; c A&#96;&#96;</span><br><span class="line"></span><br><span class="line">A&#96;&#96;   -&gt; d</span><br><span class="line">A&#96;&#96;   -&gt; e</span><br></pre></td></tr></table></figure>
+<h5 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h5><p>&emsp; &emsp;对于非LL(1)文法,程序可能死递归.以教材的文法G3.10’为例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">S  -&gt; i C t S S&#39;</span><br><span class="line">S&#39; -&gt; e S</span><br><span class="line">    | ε </span><br><span class="line">C  -&gt; b</span><br><span class="line"></span><br><span class="line">教材给出的FOLLOW集:</span><br><span class="line">FOLLOW(S)  &#x3D; &#123;#,e&#125;</span><br><span class="line">FOLLOW(S&#39;) &#x3D; &#123;#,e&#125;</span><br></pre></td></tr></table></figure>
 
-
+<p>&emsp; &emsp;这里给出程序形成死递归的步骤:</p>
+<ol>
+<li><p>求解FOLLOW(S).</p>
+</li>
+<li><p>根据S’ -&gt; e S,将FOLLOW(S’)加入FOLLOW(S).</p>
+</li>
+<li><p>尚未求得FOLLOW(S’),递归求解FOLLOW(S’).</p>
+</li>
+<li><p>根据S -&gt; i C t S S’,将FOLLOW(S)添加到FOLLOW(S’).</p>
+</li>
+<li><p>回到步骤1,形成死递归.</p>
+</li>
+</ol>
+<p>&emsp; &emsp;消除死递归的方法也很简单,设置一个递归层数上限值(这个值跟产生式组数目相关)即可.</p>
+<p>&emsp;&emsp;更好一点的做法是构造依赖树,检查有无循环依赖,且依赖树在消除文法二义性中也用得到.</p>
+<p>&emsp;&emsp;但由于实验要求明确输入为LL(1)文法,故程序未作处理.</p>
 <h4 id="FIRST集"><a href="#FIRST集" class="headerlink" title="FIRST集"></a>FIRST集</h4><p>&emsp; &emsp;由于产生式非严格有序,采用递归求解FIRST集.</p>
 <h5 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstSet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> CFG cfg;</span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Set&lt;String&gt;&gt; firstSet;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isUpdated = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
