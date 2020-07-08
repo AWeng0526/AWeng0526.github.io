@@ -108,13 +108,18 @@
 
       
       <h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ol>
-<li>掌握生成词法分析器的方法，加深对词法分析原理的理解。</li>
-<li>掌握设计、编制并调试词法分析程序的思想和方法。</li>
-<li>本实验是高级语言程序设计、数据结构和编译原理中词法分析原理等知识的综合。</li>
+<li><p>掌握生成词法分析器的方法，加深对词法分析原理的理解。</p>
+</li>
+<li><p>掌握设计、编制并调试词法分析程序的思想和方法。</p>
+</li>
+<li><p>本实验是高级语言程序设计、数据结构和编译原理中词法分析原理等知识的综合。</p>
+</li>
 </ol>
 <h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><ol>
-<li>选择一种熟悉的高级语言（如C语言，C++，VB或VC等），设计、编写一个词法分析子程序。</li>
-<li>待分析的源程序为一个简单的C语言程序，如下所示：</li>
+<li><p>选择一种熟悉的高级语言（如C语言，C++，VB或VC等），设计、编写一个词法分析子程序。</p>
+</li>
+<li><p>待分析的源程序为一个简单的C语言程序，如下所示：</p>
+</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">float</span> c, <span class="keyword">float</span> d)</span></span>&#123; </span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="keyword">float</span> y;</span><br><span class="line">        x = a + b;</span><br><span class="line">        y = c / d;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;y)</span><br><span class="line">            x = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            y = <span class="number">12.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -135,12 +140,18 @@
 <p>&emsp; &emsp;output.txt会记录记号流,log文件夹中会保存DFA,NFA,MinDFA(最小化DFA),FinalMinDFA(合并后的DFA)的结构信息.</p>
 <h2 id="程序的主要部分及其功能说明"><a href="#程序的主要部分及其功能说明" class="headerlink" title="程序的主要部分及其功能说明"></a>程序的主要部分及其功能说明</h2><h3 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h3><h4 id="正规式规范"><a href="#正规式规范" class="headerlink" title="正规式规范"></a>正规式规范</h4><p>&emsp; &emsp;类似LEX,本程序对正规式有以下的规范要求:</p>
 <ul>
-<li>正规式文本中不要包含空行.</li>
-<li>每一行代表一个正规式.</li>
-<li>行首不要留空格,正规式定义中也不要留有空格.</li>
-<li>正规式分两部分:名称+内容,两者以空格分隔.即”名称 内容”.</li>
-<li>不支持递归定义正规式,但内置了digit(0-9)和letter(a-zA-Z_)两个正规式.可以用{digit}/{letter}调用.</li>
-<li>更多规范见下文.</li>
+<li><p>正规式文本中不要包含空行.</p>
+</li>
+<li><p>每一行代表一个正规式.</p>
+</li>
+<li><p>行首不要留空格,正规式定义中也不要留有空格.</p>
+</li>
+<li><p>正规式分两部分:名称+内容,两者以空格分隔.即”名称 内容”.</p>
+</li>
+<li><p>不支持递归定义正规式,但内置了digit(0-9)和letter(a-zA-Z_)两个正规式.可以用{digit}/{letter}调用.</p>
+</li>
+<li><p>更多规范见下文.</p>
+</li>
 </ul>
 <p>&emsp; &emsp;示例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">NUMBER          &#123;digit&#125;+(.&#123;digit&#125;+|#)(E(\+|-|#)&#123;digit&#125;+|#)</span><br><span class="line">ID              &#123;letter&#125;(&#123;letter&#125;|&#123;digit&#125;)*</span><br><span class="line">BRACKET         \(|\)|[|]|&#123;|&#125;</span><br><span class="line">SEPARATOR       ,|;|:|?</span><br><span class="line">DOT             .</span><br><span class="line">ADD             \+</span><br><span class="line">SUB             -</span><br><span class="line">MUTI            \*</span><br><span class="line">DIV             &#x2F;</span><br><span class="line">AND             &amp;</span><br><span class="line">OR              \|</span><br><span class="line">NOT             !</span><br><span class="line">EQUAL           &#x3D;</span><br><span class="line">COMPARE         &gt;|&lt;|&gt;&#x3D;|&lt;&#x3D;|!&#x3D;</span><br><span class="line">WHITESPACE      (\s|\t|\r)+</span><br><span class="line">NEWLINE         (\n)+</span><br></pre></td></tr></table></figure>
